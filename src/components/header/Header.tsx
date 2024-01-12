@@ -1,13 +1,11 @@
+import NavBar from './NavBar';
+
 export default function Header() {
-	return (
-		<header>
-			<nav className='flex'>
-				<div>👩🏻‍💻</div>
-				<div>BLOG</div>
-				<div>SNIPPETS</div>
-				<div>ARCHIVES</div>
-				<div>PROJECTS</div>
-			</nav>
-		</header>
-	);
+  return (
+    <header className=' w-11/12 max-w-3xl'>
+      <nav>
+        <NavBar />
+      </nav>
+    </header>
+  );
 }
