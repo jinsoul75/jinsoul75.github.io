@@ -1,7 +1,9 @@
+import Title from '../components/common/Title';
+
 export default function Page() {
   return (
     <div >
-      <h1 className="bg-slate-700">Hello, Next.js!</h1>;
+      <Title>Jinsoul Kim</Title>
     </div>
   );
 }

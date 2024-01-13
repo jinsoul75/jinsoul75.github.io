@@ -2,7 +2,7 @@ import NavBar from './NavBar';
 
 export default function Header() {
   return (
-    <header className=' w-11/12 max-w-3xl'>
+    <header className='max-w-3xl pt-10 pb-5'>
       <nav>
         <NavBar />
       </nav>

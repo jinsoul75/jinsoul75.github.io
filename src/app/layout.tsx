@@ -14,12 +14,14 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ko">
-      <body className="flex flex-col min-h-screen items-center">
-        <Header />
-        <Suspense fallback={<Loading />}>
-          <main className="w-11/12 max-w-3xl grow">{children}</main>
-        </Suspense>
-        <Footer />
+      <body>
+        <div className="mx-auto max-w-3xl px-6 min-h-screen flex flex-col">
+          <Header />
+          <Suspense fallback={<Loading />}>
+            <main className="grow">{children}</main>
+          </Suspense>
+          <Footer />
+        </div>
       </body>
     </html>
   );

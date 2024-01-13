@@ -1,7 +1,6 @@
 export default function Footer() {
   return (
-    // border-t bottom-0 absolute flex flex-col items-center justify-center w-full p-2
-    <footer className=" w-11/12 max-w-3xl">
+    <footer className="py-4 flex flex-col items-end">
       <div className="flex">
         <div>깃허브</div>
         <div>티스토리</div>
