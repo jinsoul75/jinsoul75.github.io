@@ -10,18 +10,18 @@ const computedFields = {
   // 각 mdx 마다 경로 파싱
   slug: {
     type: 'string',
-    resolve: (doc) => `/${doc._raw.flattenedPath}`,
+    resolve: (doc: { _raw: { flattenedPath: any; }; }) => `/${doc._raw.flattenedPath}`,
   },
 
   // 각 mdx 마다 경로 생성
   slugAsParams: {
     type: 'string',
-    resolve: (doc) => doc._raw.flattenedPath.split('/').slice(1).join('/'),
+    resolve: (doc: { _raw: { flattenedPath: string; }; }) => doc._raw.flattenedPath.split('/').slice(1).join('/'),
   },
   // 각 mdx 마다 읽는 시간 추정
   readingTime: {
     type: 'json',
-    resolve: (doc) => readingTime(doc.body.raw),
+    resolve: (doc: { body: { raw: string; }; }) => readingTime(doc.body.raw),
   },
 };
 
@@ -47,7 +47,6 @@ const fields = {
 
 export const Blog = defineDocumentType(() => ({
   name: 'Blog',
-  // 어떤 경로에 있는 mdx들을 파싱할건지
   filePathPattern: `blog/**/*.mdx`,
   contentType: 'mdx',
   fields: fields,
@@ -55,7 +54,6 @@ export const Blog = defineDocumentType(() => ({
 }));
 
 export default makeSource({
-  // 실제 파일에서 mdx가 어디 경로에 있는지 (설정이 매우 중요해요!!)
   contentDirPath: './posts',
   documentTypes: [Blog],
   mdx: {
