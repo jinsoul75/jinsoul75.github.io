@@ -58,4 +58,102 @@ git commit --amend
 ??? 갑자기 됨 진짜 수정된거 하나도 없는데 갑자기 됨!!!!!!!!!!!!!
 이것때문에 1시간은 날렸는데 진짜 어이없다 ..... ㅜ ㅜ
 
+- next.js에도 suspense 로딩중 폴백을 걸 수 있다.
+[공식문서](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming)에 따르면 suspense 사용시 다음과 같은 이점이 있다.
+* suspense는 children 컴포넌트가 로딩이 끝날때 까지 fallback을 보여준다.
+- SSR은 데이터 페칭이 끝나고 오직 단 한번 HTML을 렌더링한다.
+- 그리고 클라이언트에서도 페이지에 있는 모든 컴포넌트의 코드가 다운도르 되었을 때 단 한번 UI를 하이드레이드한다.
+- streaming은 HTML페이지를 작은 청크로 쪼개서 점진적으로 서버에서 클라이언트로 보낸다.
+- 데이터에 의존되지 않는 컴포넌트가 우선순위를 가진 컴포넌트가 먼저 하이드레이션된다.
+- Streaming은 TTFB, FCP, TTI 에 도움이 된다.
+
+1. Streaming Server Rendering
+서버에서 클라이언트로 HTML을 점진적으로 랜더링 할 수 있다.
+HTML 문서를 조각조각으로 나누어 서버에서 클라이언트로 전송해서 초기 렌더링이 빨라져 사용자 경험을 향상 할 수 있다.
+HTML 문서의 일부가 준비되면 브라우저에서 바로 렌더링을 시작
+
+2. Selective Hydration
+리액트가 어떤 컴포넌트를 먼저 상호작용 가능하게 만들지 선택적 수행하는 것.
+사용자가 특정 부분에 상호작용할 때, 해당 부분에 필요한 리액트 컴포넌트들을 선택적으로 활성화
+이는 초기 로딩 시 모든 컴포넌트를 활성화하지 않고, 필요한 부분만을 선택하여 빠르게 상호작용할 수 있도록 하는 전략
+ 초기 로딩 속도를 향상시키고 효율적인 자원 사용이 가능
+ 
+</details>
+
+<details>
+<summary>Day2</summary>
+
+- 헤더, 푸터 레이아웃만 잡고 게시글 파싱을 먼저해봤다.
+
+1. `npm install contentlayer next-contentlayer`
+2. 
+next.config.js에 아래와 같은 설정을 해준다.
+build, dev 과정시 Contentlayer 훅이 자동으로 실행된다.
+
+```
+// next.config.js
+
+import { withContentlayer } from 'next-contentlayer'
+
+/** @type {import('next').NextConfig} */
+module.exports = withContentlayer({ 
+	reactStrictMode: true,
+	swcMinify: true,
+});
+```
+
+3. typescript에 아래와 같은 설정을 해준다.
+루트 폴더에 생성될 파일을 import 할때 deps가 깊어지지 않게 path를 설정해준다.
+
+```
+// tsconfig.json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    //  ^^^^^^^^^^^
+    "paths": {
+      "contentlayer/generated": ["./.contentlayer/generated"]
+      // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".contentlayer/generated"
+    // ^^^^^^^^^^^^^^^^^^^^^^
+  ]
+}
+```
+
+4. gitignore에 .contentlayer를 추가해준다.
+```
+# .gitignore
+
+# ...
+
+# contentlayer
+.contentlayer
+```
+
+5. 루트 경로에 `contentlayer.config.ts` 파일을 생성한다.
+```
+// contentlayer.config.ts
+import { defineDocumentType, makeSource } from 'contentlayer/source-files'
+
+export const Post = defineDocumentType(() => ({
+  name: 'Post',
+  filePathPattern: `**/*.md`,
+  fields: {
+    title: { type: 'string', required: true },
+    date: { type: 'date', required: true },
+  },
+  computedFields: {
+    url: { type: 'string', resolve: (post) => `/posts/${post._raw.flattenedPath}` },
+  },
+}))
+
+export default makeSource({ contentDirPath: 'posts', documentTypes: [Post] })
+```
 </details>
