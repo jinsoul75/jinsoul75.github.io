@@ -9,22 +9,25 @@ interface Props {
 }
 
 export default async function Slug({ params }: Props) {
-  const posting = await getBlogFromParams(allBlogs, params.slug);
+  const { title, category, date, tags, body } = await getBlogFromParams(
+    allBlogs,
+    params.slug,
+  );
   const readingTime = await getFromReadingTime(allBlogs, params.slug);
-  const date = posting.date.slice(0, 10);
+  const parsedDate = date.slice(0, 10);
 
   return (
     <section>
       <div>
-        {posting.title}
-        {posting.category}
-        {posting.date}
-        {posting.tags.map((tag) => (
+        {title}
+        {category}
+        {date}
+        {tags.map((tag) => (
           <div>{tag}</div>
         ))}
       </div>
       <div>
-        <Mdx code={posting.body.code} />
+        <Mdx code={body.code} />
       </div>
     </section>
   );
