@@ -1,3 +1,5 @@
+import Title from '../../components/common/Title';
+
 export default function Archives() {
-  return <div>Archives</div>;
+  return <Title>Archives</Title>;
 }

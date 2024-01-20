@@ -22,7 +22,7 @@ export default async function Slug({ params }: Props) {
         {title}
         {category}
         {date}
-        {tags.map((tag) => (
+        {tags.map((tag: string) => (
           <div>{tag}</div>
         ))}
       </div>
