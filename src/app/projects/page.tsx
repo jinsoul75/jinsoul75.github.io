@@ -1,3 +1,5 @@
+import Title from '@/components/common/Title';
+
 export default function Projects() {
-  return <div>Projects</div>;
+  return <Title>Projects</Title>;
 }

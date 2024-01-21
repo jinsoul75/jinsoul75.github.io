@@ -1,6 +1,9 @@
+import { allBlogs, Blog } from 'contentlayer/generated';
 import Title from '@/components/common/Title';
+import Link from 'next/link';
 
-export default function Blog() {
+export default function BlogPage() {
+  console.log(allBlogs[0].slug);
   return (
     <>
       <Title>Blog</Title>
@@ -16,7 +19,15 @@ export default function Blog() {
       <div>All Posts</div>
 
       <div>
-        
+        {allBlogs.map((blog) => {
+          return (
+            <div>
+              <Link href={blog.slug}>
+                {blog.title}
+              </Link>
+            </div>
+          );
+        })}
       </div>
     </>
   );

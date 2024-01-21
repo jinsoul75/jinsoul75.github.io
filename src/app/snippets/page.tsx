@@ -1,3 +1,5 @@
+import Title from '@/components/common/Title';
+
 export default function Snippets() {
-  return <div>Snippets</div>;
+  return <Title>Snippets</Title>;
 }
