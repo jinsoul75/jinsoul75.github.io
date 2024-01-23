@@ -6,22 +6,24 @@ import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
 
 /** @type {import('contentlayer/source-files').ComputedFields} */
-const computedFields = {
+const computedFields: import('contentlayer/source-files').ComputedFields = {
   // 각 mdx 마다 경로 파싱
   slug: {
     type: 'string',
-    resolve: (doc: { _raw: { flattenedPath: any; }; }) => `/${doc._raw.flattenedPath}`,
+    resolve: (doc: { _raw: { flattenedPath: any } }) =>
+      `/${doc._raw.flattenedPath}`,
   },
 
   // 각 mdx 마다 경로 생성
   slugAsParams: {
     type: 'string',
-    resolve: (doc: { _raw: { flattenedPath: string; }; }) => doc._raw.flattenedPath.split('/').slice(1).join('/'),
+    resolve: (doc: { _raw: { flattenedPath: string } }) =>
+      doc._raw.flattenedPath.split('/').slice(1).join('/'),
   },
   // 각 mdx 마다 읽는 시간 추정
   readingTime: {
     type: 'json',
-    resolve: (doc: { body: { raw: string; }; }) => readingTime(doc.body.raw),
+    resolve: (doc: { body: { raw: string } }) => readingTime(doc.body.raw),
   },
 };
 
@@ -43,6 +45,10 @@ const fields = {
     type: 'list',
     of: { type: 'string' },
   },
+  thumnail: {
+    type: 'string',
+    required: false,
+  },
 };
 
 export const Blog = defineDocumentType(() => ({
@@ -53,9 +59,17 @@ export const Blog = defineDocumentType(() => ({
   computedFields,
 }));
 
+const Projects = defineDocumentType(() => ({
+  name: 'Projects',
+  filePathPattern: `projects/**/*.mdx`,
+  contentType: 'mdx',
+  fields: fields,
+  computedFields,
+}));
+
 export default makeSource({
   contentDirPath: './posts',
-  documentTypes: [Blog],
+  documentTypes: [Blog, Projects],
   mdx: {
     remarkPlugins: [remarkGfm],
     rehypePlugins: [

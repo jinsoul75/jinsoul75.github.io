@@ -7,3 +7,5 @@ export const MENU_INFO = {
   ARCHIVES: { href: '/archives' },
   PROJECTS: { href: '/projects' },
 };
+
+export const ThumnailCategory = ['projects']
