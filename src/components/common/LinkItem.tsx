@@ -1,3 +1,5 @@
+'use client';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
 interface Props {
@@ -12,8 +14,16 @@ export default function LinkItem({
   className,
   ...props
 }: Props) {
+  const pathname = usePathname();
+  const firstPathname = pathname.split('/')[1]
+  const isActive = href === `/${firstPathname}`
+
   return (
-    <Link href={href} className={className} {...props}>
+    <Link
+      href={href}
+      className={`${className} ${isActive ? 'font-bold' : null}`}
+      {...props}
+    >
       {children}
     </Link>
   );
