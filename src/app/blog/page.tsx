@@ -1,34 +1,24 @@
 import { allBlogs, Blog } from 'contentlayer/generated';
+
 import Title from '@/components/common/Title';
-import Link from 'next/link';
+import SubTitle from '@/components/common/SubTitle'
+import Paragraph from '@/components/common/Paragraph';
+import PostList from '@/components/common/PostList';
 
 export default function BlogPage() {
-  console.log(allBlogs[0].slug);
   return (
     <>
       <Title>Blog</Title>
 
-      <div>
-        <div>블로깅페이지 입니다.</div>
-      </div>
+      <Paragraph className="pb-4">프론트엔드 세계를 탐구합니다.</Paragraph>
 
-      <div>검색바</div>
+      <div>검색바 컴포넌트</div>
 
-      <div>시리즈</div>
+      <SubTitle>Series</SubTitle>
 
-      <div>All Posts</div>
+      <SubTitle>All Posts ({allBlogs.length})</SubTitle>
 
-      <div>
-        {allBlogs.map((blog) => {
-          return (
-            <div>
-              <Link href={blog.slug}>
-                {blog.title}
-              </Link>
-            </div>
-          );
-        })}
-      </div>
+      <PostList posts={allBlogs}/>
     </>
   );
 }

@@ -1,7 +1,7 @@
 'use client';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-
+import clsx from 'clsx';
 interface Props {
   className?: string;
   href: string;
@@ -21,7 +21,7 @@ export default function LinkItem({
   return (
     <Link
       href={href}
-      className={`${className} ${isActive ? 'font-bold' : null}`}
+      className={`${className} ${clsx({'font-bold':isActive})}`}
       {...props}
     >
       {children}

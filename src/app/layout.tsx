@@ -18,7 +18,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <div className="mx-auto max-w-3xl px-6 min-h-screen flex flex-col">
           <Header />
           <Suspense fallback={<Loading />}>
-            <main className="grow">{children}</main>
+            <main className="grow h-full">{children}</main>
           </Suspense>
           <Footer />
         </div>

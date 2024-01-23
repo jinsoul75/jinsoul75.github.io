@@ -157,3 +157,45 @@ export const Post = defineDocumentType(() => ({
 export default makeSource({ contentDirPath: 'posts', documentTypes: [Post] })
 ```
 </details>
+
+<details>
+<summary>Day3</summary>
+
+- 'clsx'란 라이브러리를 알게되었다.
+특정 상황일때만 적용하고 싶은 className이 있는데
+늘 이렇게 작성해왔다.
+
+```
+className = {${isActive? 'font-bold' : null}}
+```
+저렇게 작성하면 개발자 도구에 'null'이라고 남는게 보기 불편했다.
+
+clsx를 사용하면 이런 문제를 해결해준다.
+isActive가 true 값을 가질 때에만 'font-bold'를 적용해준다.
+
+
+- figure 요소
+독립적인 콘텐츠(이미지, 코드조각, 도표)를 표현할때 사용한다.
+figcaption 요소로 figure요소가 포함하는 콘텐츠에 대한 설명을 추가할 수 있다.
+
+- time 요소
+
+- css grid border 중복 적용안되게 하기
+리스트들을 감싸는 ul 태그 위쪽,왼쪽 border만 설정
+각 li태그의 오른쪽,아래쪽 border만 설정
+
+- li안에 들어있는 a 요소 클릭 범위 설정하기
+li 태그에 패딩을 주었더니 a 요소가 박스모든 영역을 차지 하지 않았다.
+해결 => a 태그에 부모 요소의 전체 가로폭을 차지하는 block 속성을 준다.
+
+- 'React' refers to a UMD global, but the current file is a module 에러
+시도1. typeScript 컴파일 설정에 속성을 추가해준다.
+.tsx 확장자의 파일의 jsx 코드를 어떻게 컴파일 할지 결정하는 옵션
+`"jsx": "react-jsx",`
+
+결과 : npm run dev시 preserve로 바꿔버린다.
+
+시도2. allowUmdGlobalAccess 설정을 해준다.
+`"allowUmdGlobalAccess": true,`
+
+</details>

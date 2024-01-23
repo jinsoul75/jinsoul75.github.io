@@ -8,7 +8,7 @@ export default function NavBar() {
         return (
           <li key={`${menu}${index}`}>
             <LinkItem
-              className={`${!index ? 'py-2 pr-2' : 'p-2'} `}
+              className={`${index > 0 ? 'p-2' : 'py-2 pr-2'}`}
               href={MENU_INFO[menu].href}
             >
               {menu}
