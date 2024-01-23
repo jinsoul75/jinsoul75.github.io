@@ -3,11 +3,8 @@
 module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
-    extend: {
-      colors: {
-        'soul-gray': '#f5f5f7',
-        'soul-black': '#1d1d1f',
-      },
+    fontFamily: {
+      NotoSans: ['NotoSans'],
     },
   },
   variants: {
