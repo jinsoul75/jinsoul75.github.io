@@ -12,16 +12,16 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
+  const bodyStyle = 'flex flex-col mx-auto min-h-screen max-w-3xl px-6 lg:max-w-6xl lg:px-8';
+
   return (
     <html lang="ko">
-      <body>
-        <div className="mx-auto max-w-3xl px-6 min-h-screen flex flex-col">
+      <body className={bodyStyle}>
           <Header />
           <Suspense fallback={<Loading />}>
-            <main className="grow h-full">{children}</main>
+            <main className="grow my-5">{children}</main>
           </Suspense>
           <Footer />
-        </div>
       </body>
     </html>
   );
