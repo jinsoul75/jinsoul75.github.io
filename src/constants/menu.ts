@@ -8,4 +8,4 @@ export const MENU_INFO = {
   PROJECTS: { href: '/projects' },
 };
 
-export const ThumnailCategory = ['projects']
+export const thumbnailCategory = ['projects']

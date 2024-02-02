@@ -2,7 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import clsx from 'clsx';
+import { cn } from '@/libs/utils';
 interface Props {
   className?: string;
   href: string;
@@ -22,7 +22,7 @@ export default function LinkItem({
   return (
     <Link
       href={href}
-      className={`${className} ${clsx({'font-bold':isActive})}`}
+      className={`${className} ${cn({'font-bold':isActive})}`}
       {...props}
     >
       {children}

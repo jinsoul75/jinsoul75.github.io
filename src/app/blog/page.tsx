@@ -1,11 +1,13 @@
-import { allBlogs, Blog } from 'contentlayer/generated';
+import { allBlogs } from 'contentlayer/generated';
 
 import Title from '@/components/common/Title';
-import SubTitle from '@/components/common/SubTitle'
+import SubTitle from '@/components/common/SubTitle';
 import Paragraph from '@/components/common/Paragraph';
 import PostList from '@/components/common/PostList';
+import Link from 'next/link';
 
 export default function BlogPage() {
+
   return (
     <>
       <Title>Blog</Title>
@@ -15,10 +17,13 @@ export default function BlogPage() {
       <div>검색바 컴포넌트</div>
 
       <SubTitle>Series</SubTitle>
+      <div>
+        <Link href="/blog/series/react">리액트 딥다이브</Link>
+      </div>
 
       <SubTitle>All Posts ({allBlogs.length})</SubTitle>
 
-      <PostList posts={allBlogs}/>
+      <PostList posts={allBlogs} />
     </>
   );
 }

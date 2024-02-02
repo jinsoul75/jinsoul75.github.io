@@ -5,8 +5,6 @@ import Paragraph from '@/components/common/Paragraph'
 import PostList from '@/components/common/PostList';
 
 export default function Projects() {
-  console.log(allProjects)
-
   return (
     <>
       <Title>Projects</Title>

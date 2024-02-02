@@ -1,7 +1,16 @@
-export default function SubTitle({ children, className, ...props }) {
+import { ReactNode } from 'react';
+
+export default function SubTitle({
+  children,
+  className,
+  ...props
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
   return (
     <h2
-      className={`${className} mb-2 text-xl font-bold tracking-tight`}
+      className={`${className} mb-4 text-3xl font-bold tracking-tight`}
       {...props}
     >
       {children}

@@ -1,7 +1,13 @@
-import { allBlogs } from '../../../../.contentlayer/generated';
-import { getFromReadingTime, getBlogFromParams } from '../../../libs/getPage';
-import Mdx from '../../../components/mdx/Mdx';
-
+import { allBlogs } from 'contentlayer/generated';
+import { getBlogFromParams } from '../../../libs/getPage';
+import {
+  PostDate,
+  PostReadingTime,
+  PostTags,
+} from '@/components/common/PostItem';
+import Mdx from '@/components/mdx/Mdx';
+import Title from '@/components/common/Title';
+import Toc from '@/components/toc/Toc';
 interface Props {
   params: {
     slug: string;
@@ -9,26 +15,32 @@ interface Props {
 }
 
 export default async function Slug({ params }: Props) {
-  const { title, category, date, tags, body } = await getBlogFromParams(
+  const { title, date, tags, body, readingTime, headings } = getBlogFromParams(
     allBlogs,
     params.slug,
   );
-  const readingTime = await getFromReadingTime(allBlogs, params.slug);
-  const parsedDate = date.slice(0, 10);
 
   return (
-    <section>
-      <div>
-        {title}
-        {category}
-        {date}
-        {tags.map((tag: string) => (
-          <div>{tag}</div>
-        ))}
+    <article>
+      <div className="flex flex-col items-center space-y-2">
+        <Title>{title}</Title>
+        <div className="flex">
+          <PostDate date={date.split('T')[0]} />
+          <PostReadingTime readingTime={readingTime.text} />
+        </div>
+        <PostTags tags={tags} />
       </div>
-      <div>
-        <Mdx code={body.code} />
+
+      <hr className="bg-black mb-6 mt-4 h-px border-0" />
+
+      <div className="flex gap-8">
+        <div className="prose">
+          <Mdx code={body.code} />
+        </div>
+        <aside className="sticky self-start top-[120px] right-6 grow ml-10 mt-10 ">
+          <Toc headings={headings} />
+        </aside>
       </div>
-    </section>
+    </article>
   );
 }

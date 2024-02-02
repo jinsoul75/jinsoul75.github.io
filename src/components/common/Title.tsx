@@ -7,7 +7,7 @@ export default function Title({
   return (
     <h1
       {...props}
-      className={`mb-4 text-3xl font-extrabold tracking-tight sm:text-5xl ${className}`}
+      className={`text-3xl font-extrabold tracking-tight sm:text-5xl ${className}`}
     />
   );
 }

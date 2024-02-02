@@ -1,5 +1,5 @@
-import { allProjects } from '../../../../.contentlayer/generated';
-import { getFromReadingTime, getBlogFromParams } from '../../../libs/getPage';
+import { allProjects } from 'contentlayer/generated';
+import { getBlogFromParams } from '../../../libs/getPage';
 import Mdx from '../../../components/mdx/Mdx';
 
 interface Props {
@@ -9,16 +9,16 @@ interface Props {
 }
 
 export default async function Slug({ params }: Props) {
-  const { title, category, date, tags, body } = await getBlogFromParams(
-    allProjects,
-    params.slug,
-  );
-  const readingTime = await getFromReadingTime(allProjects, params.slug);
-  const parsedDate = date.slice(0, 10);
+  // const { title, category, date, tags, body } =  getBlogFromParams(
+  //   allProjects,
+  //   params.slug,
+  // );
+  // const readingTime = await getFromReadingTime(allProjects, params.slug);
+  // const parsedDate = date.slice(0, 10);
 
   return (
     <section>
-      <div>
+      {/* <div>
         {title}
         {category}
         {date}
@@ -28,7 +28,7 @@ export default async function Slug({ params }: Props) {
       </div>
       <div>
         <Mdx code={body.code} />
-      </div>
+      </div> */}
     </section>
   );
 }
