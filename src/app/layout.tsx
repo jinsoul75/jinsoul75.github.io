@@ -1,17 +1,11 @@
 import { Suspense, ReactNode } from 'react';
 import type { Metadata } from 'next';
-import { Inter as FontSans } from 'next/font/google';
 
 import { cn } from '@/libs/utils';
 import './globals.css';
 import Footer from '@/components/footer/Footer';
 import Header from '@/components/header/Header';
 import Loading from './loading';
-
-export const fontSans = FontSans({
-  subsets: ['latin'],
-  variable: '--font-sans',
-});
 
 export const metadata: Metadata = {
   title: 'Jinsoul Blog',
@@ -24,7 +18,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
   return (
     <html lang="ko">
-      <body className={cn(bodyStyle, fontSans.variable)}>
+      <body className={cn(bodyStyle)}>
         <Header />
         <Suspense fallback={<Loading />}>
           <main className="grow my-5 flex flex-col">{children}</main>
