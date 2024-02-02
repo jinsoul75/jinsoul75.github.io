@@ -2,11 +2,6 @@
 
 import { useEffect, useState } from 'react';
 
-interface IHeadingTops {
-  slug: string;
-  top: number;
-}
-
 export default function useTocScroll(tableOfContents: any) {
   const [currentSectionSlug, setCurrentSectionSlug] = useState<
     string | undefined

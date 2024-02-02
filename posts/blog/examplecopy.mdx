@@ -1,0 +1,132 @@
+---
+title: 샘플 블로그 제목1
+date: 2024-01-12
+category: posts
+tags: 
+- 샘플1
+---
+
+## Table of Contents
+
+최근에 Next.js 프로젝트를 만들어보면서 CSR, SSR의 뿐만 아니라 React Server Component(이하 RSC) 개념과도 깊은 연관이 있음을 알게 되었다.
+
+리액트가 서버 컴포넌트를 제공해 주지 않았을 때를 생각해 본 적이 없어서 (무려 2년도 안 된 일) 그저 Next.js가 React 앱을 SSR해주는 프레임워크정도로만 알고 있었기에 RSC를 공부하면서 Next.js를 이해하는데 도움이 되어 학습한 내용을 기록한다.
+
+## **[RSC란?](https://summerr.tistory.com/134#RSC%EB%9E%80%3F-1)**
+
+말 그대로 서버에서 실행되는 리액트 컴포넌트이다. 이 단순한 개념이 뭐가 그렇게 특별해서 하나의 주제로 선정했냐 하면 바로 '컴포넌트'라는데 있다.
+
+컴포넌트는 내부로직과 함께 UI를 그려주는 단위지만 다른 말로 하면  jsx를 반환하는 함수다.
+
+이 함수는 CSR에서는 비동기 데이터 fetching을 할 때 useEffect를 사용해야 한다.
+
+데이터 fetching은 순수함수여야 하는 리액트 컴포넌트에서 일어나는 side effect이기 때문이다.
+
+서버에서는 useEffect를 사용할 수 없다.
+
+useEffect는 클라이언트서 컴포넌트 생명주기 사이클에 관여하는 Hooks이기 때문이다.
+
+그렇다면 SSR에서는 데이터 패칭을 받아올 수 없는 걸까?
+
+## **[getServerSideProps](https://summerr.tistory.com/134#getServerSideProps-1)**
+
+```tsx
+import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
+
+type Repo = {
+  name: string
+  stargazers_count: number
+}
+
+export const getServerSideProps = (async () => {
+// Fetch data from external APIconst res = await fetch('https://api.github.com/repos/vercel/next.js')
+  const repo: Repo = await res.json()
+// Pass data to the page via propsreturn { props: { repo } }
+}) satisfies GetServerSideProps<{ repo: Repo }>
+
+export default function Page({
+  repo,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  return (
+    <main>
+      <p>{repo.stargazers_count}</p>
+    </main>
+  )
+}
+```
+
+Next.js 공식문서에 있는 예제 코드이다.
+
+getServerSideProps함수를 사용하면 유저가 해당 페이지를 방문할 때 실행되어 data를 fetching 할 수 있다.
+
+getServerSideProps는 오직 폴더 최상단 파일인 page.tsx에서만 import 할 수 있다.
+
+따라서 불러온 데이터가 필요한 곳이 page.tsx 폴더가 아니라면 해당 폴더까지 prop으로 전달을 해주어야 한다.
+
+마치 클라이언트 컴포넌트에서 전역상태 라이브러리 없이 useState의 상태를 전달할 때처럼 **props drilling**이 발생한다.
+
+> props passed to the page component can be viewed on the client as part of the initial HTML. This is to allow the page to be hydrated correctly.
+> 
+
+뿐만 아니라 서버에서 미리 data fetching을 함으로써 hydration 과정이 줄어들어야 하는데
+
+공식문서를 읽어보니 hydration이 되는 것 같다.
+
+hydration 후 유저 인터렉션이 가능해지는데 이 또한 getServerSideProps의 한계였다.
+
+## **[RSC의 등장](https://summerr.tistory.com/134#RSC%EC%9D%98%20%EB%93%B1%EC%9E%A5-1)**
+
+RSC는 리액트 18 버전부터 도입된 개념이다.
+
+서버에서 동작할 수 있는 컴포넌트로 Next.js 13 버전부터는 모든 컴포넌트가 기본적으로 RSC이다.
+
+hooks나 이벤트 핸들러를 사용으로 클라이언트 컴포넌트를 사용해야 한다면 상단에 'use client'를 작성해 주면 된다.
+
+RSC의 장점은 다음과 같다.
+
+- 서버에서 동작하는 함수이므로 useEffect 없이 **data fetching이 가능하다.** 데이터 요청 횟수를 줄일 수 있을뿐더러 기존 getServerProps의 문제였던 props drilling 문제를 해결할 수 있다.
+- RSC는 서버에서 이미 모두 실행되기 때문에 **번들이 필요 없다.** RSC에서만 사용되는 라이브러리라면 또한 번들에 포함되지 않기 때문에 다운로드하여야 할 js번들 사이즈가 줄어 SSR의 단점인 TTI를 개선할 수 있다.
+- **코드 자동분할이된다.** react.lazy로 일일히 분할해 주었던 작업을 RSC에서 client component import시 자동으로 코드를 분할한다.
+- 서버에서 UI를 **점진적으로 렌더링** 할 수 있다. 랜더링 작업은 청크로 분할되어 준비되는 대로 클라이언트로 스트리밍 된다. 이를 통해 사용자는 전체 콘텐츠의 렌더링이 완료되기 전에 페이지의 일부를 즉시 볼 수 있다. ex) suspense, loading.tsx
+
+```tsx
+export default function ArtistPage({ artist }) {
+  return (
+    <>
+      <h1>{artist.name}</h1>
+      <Suspense fallback={<Loading />}>
+        <Albums artistId={artist.id} />
+      </Suspense>
+    </>
+  );
+}
+
+function Loading() {
+  return <h2>🌀 Loading...</h2>;
+}
+
+// <Albums/> 컴포넌트가 로딩 되는동안 <Loading/> 컴포넌트를 보여준다.
+```
+
+## **[RSC? SSR?](https://summerr.tistory.com/134#RSC%3F%20SSR%3F-1)**
+
+처음에 RSC 개념을 살펴보면서 그래서 서버에서 랜더링된다는건데 SSR이랑 뭐가 다르다는거지? 생각이 들었다.
+
+단순하게 보면 서버에서 실행되는 컴포넌트(RSC)이고 서버에서 랜더링되는 기술(SSR)이다.
+
+랜더링이 되기 위해 컴포넌트가 실행되어 해석되고 해석된 데이터를 html로 변환되어야한다.
+
+이때 전자에 관여하는게 RSC이고 후자에 관여하는게 SSR이다.
+
+최종 결과물로 놓고 보면 RSC는 직렬화된 JSON 파일이고 SSR은 html이다.
+
+- 따라서 RSC의 코드는 클라이언트로 전달되지 않지만 SSR의 모든 컴포넌트는 js 번들에 포함된다.
+- 또한 RSC는 input 같은 클라이언트 상태를 유지하며 여러번 데이터를 가져와 리렌더링해서 refetch 될 수 있다.하지만 SSR은 refetch가 필요한 경우 html 전체를 리랜더링 해야한다.
+
+앞서 RSC가 컴포넌트라는 것을 강조했는데 SSR과의 이같은 차이점 때문이었다.
+
+## **[마무리](https://summerr.tistory.com/134#%EB%A7%88%EB%AC%B4%EB%A6%AC-1)**
+
+next.js는 공식문서가 잘되어있어서 필요한 문서를 찾아보는 재미가 있다.
+
+RSC가 동작하는 방법도 흥미로운데 조금 어려우니 다음에 다뤄보기로..!

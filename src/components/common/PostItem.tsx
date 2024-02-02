@@ -27,6 +27,7 @@ export function PostThumbnail({ thumbnailUrl }: { thumbnailUrl: string }) {
       <img
         className="transition-transform duration-300 transform group-hover:scale-110"
         src={`${thumbnailUrl}`}
+        alt='post-thumbnail'
       />
     </figure>
   );

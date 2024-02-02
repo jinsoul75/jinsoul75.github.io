@@ -6,7 +6,11 @@ interface SectionProps {
   children: ReactNode;
 }
 
-export default function Section({ className, children, ...props }: SectionProps): JSX.Element {
+export default function Section({
+  className,
+  children,
+  ...props
+}: SectionProps) {
   return (
     <section className={cn(`${className} grow`)} {...props}>
       {children}
