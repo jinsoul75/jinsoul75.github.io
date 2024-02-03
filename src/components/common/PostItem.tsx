@@ -12,7 +12,7 @@ export default function PostItem({
   key: string;
   slug: string;
 }) {
-  const className = 'border-r border-r-black border-b border-b-black';
+  const className = '';
 
   return (
     <article key={key} className={className}>
@@ -25,7 +25,7 @@ export function PostThumbnail({ thumbnailUrl }: { thumbnailUrl: string }) {
   return (
     <figure className="relative overflow-hidden group">
       <img
-        className="transition-transform duration-300 transform group-hover:scale-110"
+        className="transition-all duration-300 transform group-hover:scale-110"
         src={`${thumbnailUrl}`}
         alt='post-thumbnail'
       />

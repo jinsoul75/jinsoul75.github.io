@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 
 export default function PostList({ posts }: { posts: any }) {
   const className =
-    'grid grid-cols-2 border-t border-t-black border-l border-l-black';
+    'grid grid-cols-2';
 
   return (
     <section className={className}>

@@ -4,12 +4,14 @@ import {
   FieldDefs,
 } from 'contentlayer/source-files';
 
+import rehypePrettyCode, { Options } from 'rehype-pretty-code';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
 import remarkBreaks from 'remark-breaks';
 import readingTime from 'reading-time';
 import GithubSlugger from 'github-slugger';
+import { readFileSync } from 'fs';
 
 /** @type {import('contentlayer/source-files').ComputedFields} */
 
@@ -100,6 +102,17 @@ const Projects = defineDocumentType(() => ({
   computedFields,
 }));
 
+const prettyCodeOptions:Options = {
+  theme: {
+    dark: JSON.parse(
+      readFileSync('./code_theme/one-dark-pro-darker.json', 'utf-8'),
+    ),
+    light: JSON.parse(
+      readFileSync('./code_theme/atom-one-light.json', 'utf-8'),
+    ),
+  },
+};
+
 export default makeSource({
   contentDirPath: './posts',
   documentTypes: [Blog, Projects],
@@ -107,6 +120,7 @@ export default makeSource({
     remarkPlugins: [remarkGfm, remarkBreaks],
     rehypePlugins: [
       rehypeSlug,
+      [rehypePrettyCode, prettyCodeOptions],
       [
         rehypeAutolinkHeadings,
         {

@@ -14,9 +14,12 @@ export default function Toc({ headings }: { headings: Headings[] }) {
   const { currentSectionSlug } = useTocScroll(headings);
 
   return (
-    <div>
-      <div>On this page</div>
-      <ul>
+    <div className="border border-black p-4 flex flex-col">
+      <div className="text-2xl font-extrabold">On this page</div>
+
+      <hr className="bg-black mb-6 mt-4 h-px border-0" />
+
+      <ul className='space-y-4'>
         {headings.map((heading) => (
           <li key={heading.slug}>
             <Link
