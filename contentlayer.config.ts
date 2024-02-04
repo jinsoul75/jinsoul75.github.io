@@ -4,6 +4,8 @@ import {
   FieldDefs,
 } from 'contentlayer/source-files';
 
+import { Pluggable } from 'unified';
+
 import rehypePrettyCode, { Options } from 'rehype-pretty-code';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSlug from 'rehype-slug';
@@ -102,17 +104,6 @@ const Projects = defineDocumentType(() => ({
   computedFields,
 }));
 
-const prettyCodeOptions:Options = {
-  theme: {
-    dark: JSON.parse(
-      readFileSync('./code_theme/one-dark-pro-darker.json', 'utf-8'),
-    ),
-    light: JSON.parse(
-      readFileSync('./code_theme/atom-one-light.json', 'utf-8'),
-    ),
-  },
-};
-
 export default makeSource({
   contentDirPath: './posts',
   documentTypes: [Blog, Projects],
@@ -120,7 +111,7 @@ export default makeSource({
     remarkPlugins: [remarkGfm, remarkBreaks],
     rehypePlugins: [
       rehypeSlug,
-      [rehypePrettyCode, prettyCodeOptions],
+      [rehypePrettyCode] as unknown as Pluggable<any[]>,
       [
         rehypeAutolinkHeadings,
         {
