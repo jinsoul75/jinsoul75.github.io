@@ -19,14 +19,14 @@ export default function Toc({ headings }: { headings: Headings[] }) {
 
       <hr className="bg-black mb-6 mt-4 h-px border-0" />
 
-      <ul className='space-y-4'>
+      <ul className="space-y-4">
         {headings.map((heading) => (
           <li key={heading.slug}>
             <Link
               href={`#${heading.slug}`}
-              className={cn({
+              className={`${cn({
                 'font-bold': currentSectionSlug === heading.slug,
-              })}
+              })}`}
             >
               {heading.text}
             </Link>

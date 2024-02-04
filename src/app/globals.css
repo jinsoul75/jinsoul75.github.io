@@ -80,6 +80,6 @@
 }
 
 .prose .anchor:after {
-  @apply text-gray-300 dark:text-gray-700;
+  @apply text-gray-300;
   content: '#';
 }

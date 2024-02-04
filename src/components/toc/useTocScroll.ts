@@ -14,9 +14,7 @@ export default function useTocScroll(tableOfContents: any) {
 
     function onResize() {
       headings = Array.from(
-        document.querySelectorAll<HTMLElement>(
-          '.prose h2:not(#table-of-contents),h3:not(#table-of-contents)',
-        ),
+        document.querySelectorAll<HTMLElement>('.prose h2,h3'),
       ).map((element) => ({ id: element.id, top: element.offsetTop }));
     }
 

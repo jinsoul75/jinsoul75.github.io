@@ -103,6 +103,9 @@ const Projects = defineDocumentType(() => ({
   fields,
   computedFields,
 }));
+const options = {
+  theme: 'one-dark-pro',
+};
 
 export default makeSource({
   contentDirPath: './posts',
@@ -111,7 +114,7 @@ export default makeSource({
     remarkPlugins: [remarkGfm, remarkBreaks],
     rehypePlugins: [
       rehypeSlug,
-      [rehypePrettyCode] as unknown as Pluggable<any[]>,
+      [rehypePrettyCode, options] as unknown as Pluggable<any[]>,
       [
         rehypeAutolinkHeadings,
         {

@@ -12,7 +12,7 @@ tags:
 
 리액트가 서버 컴포넌트를 제공해 주지 않았을 때를 생각해 본 적이 없어서 (무려 2년도 안 된 일) 그저 Next.js가 React 앱을 SSR해주는 프레임워크정도로만 알고 있었기에 RSC를 공부하면서 Next.js를 이해하는데 도움이 되어 학습한 내용을 기록한다.
 
-## **[RSC란?](https://summerr.tistory.com/134#RSC%EB%9E%80%3F-1)**
+## **RSC란?**
 
 말 그대로 서버에서 실행되는 리액트 컴포넌트이다. 이 단순한 개념이 뭐가 그렇게 특별해서 하나의 주제로 선정했냐 하면 바로 '컴포넌트'라는데 있다.
 
@@ -28,7 +28,7 @@ useEffect는 클라이언트서 컴포넌트 생명주기 사이클에 관여하
 
 그렇다면 SSR에서는 데이터 패칭을 받아올 수 없는 걸까?
 
-## **[getServerSideProps](https://summerr.tistory.com/134#getServerSideProps-1)**
+## **getServerSideProps**
 
 ```tsx
 import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
@@ -74,7 +74,7 @@ getServerSideProps는 오직 폴더 최상단 파일인 page.tsx에서만 import
 
 hydration 후 유저 인터렉션이 가능해지는데 이 또한 getServerSideProps의 한계였다.
 
-## **[RSC의 등장](https://summerr.tistory.com/134#RSC%EC%9D%98%20%EB%93%B1%EC%9E%A5-1)**
+## **RSC의 등장**
 
 RSC는 리액트 18 버전부터 도입된 개념이다.
 
@@ -108,7 +108,7 @@ function Loading() {
 // <Albums/> 컴포넌트가 로딩 되는동안 <Loading/> 컴포넌트를 보여준다.
 ```
 
-## **[RSC? SSR?](https://summerr.tistory.com/134#RSC%3F%20SSR%3F-1)**
+## **RSC? SSR?**
 
 처음에 RSC 개념을 살펴보면서 그래서 서버에서 랜더링된다는건데 SSR이랑 뭐가 다르다는거지? 생각이 들었다.
 
@@ -125,7 +125,7 @@ function Loading() {
 
 앞서 RSC가 컴포넌트라는 것을 강조했는데 SSR과의 이같은 차이점 때문이었다.
 
-## **[마무리](https://summerr.tistory.com/134#%EB%A7%88%EB%AC%B4%EB%A6%AC-1)**
+## **마무리**
 
 next.js는 공식문서가 잘되어있어서 필요한 문서를 찾아보는 재미가 있다.
 
