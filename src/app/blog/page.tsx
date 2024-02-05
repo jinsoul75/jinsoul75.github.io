@@ -1,16 +1,13 @@
-import { allBlogs } from 'contentlayer/generated';
+import Link from 'next/link';
 
-import { getSortByLatestDate } from '@/libs/getPosts';
+import { allBlogPosts } from '@/constants/dataset';
 
 import Title from '@/components/common/Title';
 import SubTitle from '@/components/common/SubTitle';
 import Paragraph from '@/components/common/Paragraph';
 import PostList from '@/components/common/PostList';
-import Link from 'next/link';
 
 export default function BlogPage() {
-  const sortedPosts = getSortByLatestDate(allBlogs);
-
   return (
     <>
       <Title>Blog</Title>
@@ -24,9 +21,9 @@ export default function BlogPage() {
         <Link href="/blog/series/react">리액트 딥다이브</Link>
       </div>
 
-      <SubTitle>All Posts ({allBlogs.length})</SubTitle>
+      <SubTitle>All Posts ({allBlogPosts.length})</SubTitle>
 
-      <PostList posts={sortedPosts} />
+      <PostList posts={allBlogPosts} />
     </>
   );
 }
