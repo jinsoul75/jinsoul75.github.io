@@ -3,7 +3,7 @@ import { recentPosts } from '@/constants/dataset';
 import Title from '@/components/common/Title';
 import Paragraph from '@/components/common/Paragraph';
 import SubTitle from '@/components/common/SubTitle';
-import { allBlogs } from 'contentlayer/generated';
+
 import MainCard from '@/components/card/MainCard';
 
 export default function Page() {
