@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 
 export default function PostList({ posts }: { posts: any }) {
   const className =
-    'grid grid-cols-2';
+    'grid grid-cols-2 border-t border-t-black border-l border-l-black';
 
   return (
     <section className={className}>
@@ -17,16 +17,17 @@ export default function PostList({ posts }: { posts: any }) {
         const formatDate = dayjs(post.date).format('YY.MM.DD');
 
         return (
-          <PostItem key={post._id} slug={post.slug}>
+          <PostItem
+            key={post._id}
+            className="border-r border-r-black border-b border-b-black"
+          >
             <Link href={post.slug}>
               {isWithThumbnail && (
                 <PostItem.PostThumbnail thumbnailUrl={post.thumbnail} />
               )}
             </Link>
             <div className="p-2">
-              <Link href={post.slug}>
-                <PostItem.PostTitle title={post.title} />
-              </Link>
+              <PostItem.PostTitle title={post.title} slug={post.slug} />
               <div className="flex mt-8">
                 <div className="grow">
                   <PostItem.PostTags tags={post.tags} />

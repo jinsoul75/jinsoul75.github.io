@@ -1,8 +1,14 @@
+import { getRecentPost } from '@/libs/getPosts';
+
 import Title from '@/components/common/Title';
 import Paragraph from '@/components/common/Paragraph';
 import SubTitle from '@/components/common/SubTitle';
+import { allBlogs } from 'contentlayer/generated';
+import MainCard from '@/components/card/MainCard';
 
 export default function Page() {
+  const sortedRecentPosts = getRecentPost(allBlogs)
+
   return (
     <>
       <section className="grow">
@@ -24,6 +30,11 @@ export default function Page() {
       </section>
       <section className="grow">
         <SubTitle>Recent Posts</SubTitle>
+        <ul className='grid grid-cols-4 gap-4'>
+          {sortedRecentPosts.slice(0, 4).map((blog) => (
+            <MainCard blog={blog} />
+          ))}
+        </ul>
       </section>
     </>
   );

@@ -1,5 +1,7 @@
 import { allBlogs } from 'contentlayer/generated';
 
+import { getSortByLatestDate } from '@/libs/getPosts';
+
 import Title from '@/components/common/Title';
 import SubTitle from '@/components/common/SubTitle';
 import Paragraph from '@/components/common/Paragraph';
@@ -7,6 +9,7 @@ import PostList from '@/components/common/PostList';
 import Link from 'next/link';
 
 export default function BlogPage() {
+  const sortedPosts = getSortByLatestDate(allBlogs);
 
   return (
     <>
@@ -23,7 +26,7 @@ export default function BlogPage() {
 
       <SubTitle>All Posts ({allBlogs.length})</SubTitle>
 
-      <PostList posts={allBlogs} />
+      <PostList posts={sortedPosts} />
     </>
   );
 }

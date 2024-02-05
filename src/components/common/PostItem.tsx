@@ -2,18 +2,17 @@ import Link from 'next/link';
 import { ReactNode } from 'react';
 import { IoCalendarClearOutline } from 'react-icons/io5';
 import { GoClock } from 'react-icons/go';
+import { cn } from '@/libs/utils';
 
 export default function PostItem({
   children,
   key,
-  slug,
+  className,
 }: {
   children: ReactNode;
   key: string;
-  slug: string;
+  className?: string;
 }) {
-  const className = '';
-
   return (
     <article key={key} className={className}>
       {children}
@@ -27,16 +26,28 @@ export function PostThumbnail({ thumbnailUrl }: { thumbnailUrl: string }) {
       <img
         className="transition-all duration-300 transform group-hover:scale-110"
         src={`${thumbnailUrl}`}
-        alt='post-thumbnail'
+        alt="post-thumbnail"
       />
     </figure>
   );
 }
 
-export function PostTitle({ title }: { title: string }) {
+export function PostTitle({
+  title,
+  className,
+  slug,
+}: {
+  title: string;
+  className?: string;
+  slug: string;
+}) {
   return (
-    <h2 className="text-2xl bold hover:underline hover:underline-offset-6 hover:decoration-4">
-      {title}
+    <h2
+      className={cn(
+        `text-2xl bold hover:underline hover:underline-offset-6 hover:decoration-4 ${className}`,
+      )}
+    >
+      <Link href={slug}>{title}</Link>
     </h2>
   );
 }
@@ -50,9 +61,17 @@ export function PostDate({ date }: { date: string }) {
   );
 }
 
-export function PostTags({ tags }: { tags: string[] | undefined }) {
+export function PostTags({
+  tags,
+  className,
+}: {
+  tags: string[] | undefined;
+  className?: string;
+}) {
   return (
-    <ul className="flex flex-wrap place-items-start space-x-2">
+    <ul
+      className={cn(`flex flex-wrap place-items-start space-x-2 ${className}`)}
+    >
       {tags?.map((tag: string) => (
         <li className="border border-black rounded-full hover:bg-black hover:text-white">
           <Link href={'/archives'} className="block px-2">
