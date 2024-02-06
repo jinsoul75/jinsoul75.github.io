@@ -4,11 +4,13 @@ import {
   PostReadingTime,
   PostTags,
 } from '@/components/common/PostItem';
+import { notFound } from 'next/navigation';
+
 import Mdx from '@/components/mdx/Mdx';
 import Title from '@/components/common/Title';
 import Toc from '@/components/toc/Toc';
 import ProgressBar from '@/components/progressBar/ProgressBar';
-import { notFound } from 'next/navigation';
+import Profile from '@/components/profile/Profile';
 interface Props {
   params: {
     slug: string;
@@ -48,6 +50,8 @@ export default async function Slug({ params }: Props) {
       </article>
 
       <hr className="bg-black mb-6 mt-4 h-px border-0" />
+
+      <Profile />
     </>
   );
 }
