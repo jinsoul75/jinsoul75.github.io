@@ -18,7 +18,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
   return (
     <html lang="ko">
-      <body className={cn(bodyStyle)}>
+      <body className={cn(bodyStyle)} suppressHydrationWarning={true}>
         <Header />
         <Suspense fallback={<Loading />}>
           <main className="grow my-5 flex flex-col">{children}</main>
