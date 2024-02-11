@@ -6,14 +6,13 @@ import {
 
 import { Pluggable } from 'unified';
 
-import rehypePrettyCode, { Options } from 'rehype-pretty-code';
+import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
 import remarkBreaks from 'remark-breaks';
 import readingTime from 'reading-time';
 import GithubSlugger from 'github-slugger';
-import { readFileSync } from 'fs';
 
 /** @type {import('contentlayer/source-files').ComputedFields} */
 

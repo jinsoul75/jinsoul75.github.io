@@ -6,25 +6,25 @@ import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
 import remarkToc from 'remark-toc';
 
-export const serializeMdx = (source: string) => {
-	return serialize(source, {
-		parseFrontmatter: true,
-		mdxOptions: {
-			remarkPlugins: [remarkToc, remarkGfm],
-			rehypePlugins: [
-				rehypeSlug,
-				rehypeCodeTitles,
-				rehypePrism,
-				[
-					rehypeAutolinkHeadings,
-					{
-						properties: {
-							className: ['anchor'],
-						},
-					},
-				],
-			],
-			format: 'mdx',
-		},
-	});
+export const serializeMdx = async (source: string) => {
+  return serialize(source, {
+    parseFrontmatter: true,
+    mdxOptions: {
+      remarkPlugins: [remarkToc, remarkGfm],
+      rehypePlugins: [
+        rehypeSlug,
+        rehypeCodeTitles,
+        rehypePrism,
+        [
+          rehypeAutolinkHeadings,
+          {
+            properties: {
+              className: ['anchor'],
+            },
+          },
+        ],
+      ],
+      format: 'mdx',
+    },
+  });
 };

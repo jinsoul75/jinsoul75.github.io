@@ -17,7 +17,7 @@ interface Props {
   };
 }
 
-export default async function Slug({ params }: Props) {
+export default function Slug({ params }: Props) {
   const post = blogPostBySlug(params.slug);
 
   if (!post) return notFound();

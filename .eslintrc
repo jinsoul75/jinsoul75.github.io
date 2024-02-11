@@ -2,7 +2,7 @@
 	"env": {
 		"es6": true
 	},
-	"extends": ["react-app", "eslint:recommended", "prettier"],
+	"extends": ["react-app", "eslint:recommended", "prettier", "next"],
 	"rules": {
 		"no-multiple-empty-lines": "error",
 		"no-console": ["error", { "allow": ["warn", "error", "info"] }], 
