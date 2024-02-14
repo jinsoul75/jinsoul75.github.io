@@ -1,21 +1,19 @@
-import { blogPostBySlug, allBlogPosts } from '../../../constants/dataset';
+import { notFound } from 'next/navigation';
+
+import { getBlogPostBySlug, allBlogPosts } from '../../../constants/dataset';
+
+import { ParamsProps } from '@/types/types';
+
 import {
   PostDate,
   PostReadingTime,
   PostTags,
 } from '@/components/common/PostItem';
-import { notFound } from 'next/navigation';
-
 import Mdx from '@/components/mdx/Mdx';
 import Title from '@/components/common/Title';
 import Toc from '@/components/toc/Toc';
 import ProgressBar from '@/components/progressBar/ProgressBar';
 import Profile from '@/components/profile/Profile';
-interface Props {
-  params: {
-    slug: string;
-  };
-}
 
 export async function generateStaticParams() {
   return [...allBlogPosts].map((blogPost) => ({
@@ -23,8 +21,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function Slug({ params }: Props) {
-  const post = blogPostBySlug(params.slug);
+export default function Slug({ params }: ParamsProps) {
+  const post = getBlogPostBySlug(params.slug);
 
   if (!post) return notFound();
 

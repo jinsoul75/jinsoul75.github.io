@@ -10,7 +10,7 @@ export default function SubTitle({
 }) {
   return (
     <h2
-      className={`${className} mb-4 text-3xl font-bold tracking-tight`}
+      className={`${className} my-4 text-3xl font-bold tracking-tight`}
       {...props}
     >
       {children}

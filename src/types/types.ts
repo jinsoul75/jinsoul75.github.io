@@ -1,4 +1,8 @@
 export interface Post {
-    title: string,
-    
+  title: string;
+}
+export interface ParamsProps {
+  params: {
+    slug: string;
+  };
 }
