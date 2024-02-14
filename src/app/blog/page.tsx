@@ -8,6 +8,7 @@ import Paragraph from '@/components/common/Paragraph';
 import PostList from '@/components/common/PostList';
 
 export default function BlogPage() {
+
   return (
     <>
       <Title>Blog</Title>

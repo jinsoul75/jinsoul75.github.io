@@ -102,6 +102,7 @@ const Projects = defineDocumentType(() => ({
   fields,
   computedFields,
 }));
+
 const options = {
   theme: 'one-dark-pro',
 };

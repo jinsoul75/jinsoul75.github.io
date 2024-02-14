@@ -1,4 +1,4 @@
-import { blogPostBySlug } from '../../../constants/dataset';
+import { blogPostBySlug, allBlogPosts } from '../../../constants/dataset';
 import {
   PostDate,
   PostReadingTime,
@@ -15,6 +15,12 @@ interface Props {
   params: {
     slug: string;
   };
+}
+
+export async function generateStaticParams() {
+  return [...allBlogPosts].map((blogPost) => ({
+    slug: blogPost.slugAsParams,
+  }));
 }
 
 export default function Slug({ params }: Props) {
