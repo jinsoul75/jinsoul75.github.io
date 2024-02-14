@@ -6,6 +6,10 @@ export const allBlogPosts = [...allBlogs].sort((a, b) => {
   return dateB.getTime() - dateA.getTime();
 });
 
+export const seriesPosts = [...allBlogPosts].filter(
+  (blogPost) => blogPost.IsSeries,
+);
+
 export const blogPostBySlug = (slug: string) =>
   allBlogPosts.find((blog) => blog.slugAsParams === slug);
 

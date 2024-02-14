@@ -85,6 +85,10 @@ const fields: FieldDefs = {
     type: 'string',
     required: false,
   },
+  IsSeries: {
+    type: 'boolean',
+    required: false,
+  },
 };
 
 export const Blog = defineDocumentType(() => ({
