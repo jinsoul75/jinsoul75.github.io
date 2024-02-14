@@ -1,3 +1,11 @@
+import { allBlogPosts } from '@/constants/dataset';
+
+export async function generateStaticParams() {
+  return [...allBlogPosts].map((blogPost) => ({
+    slug: blogPost.slugAsParams,
+  }));
+}
+
 export default function Series() {
   return (
     <>

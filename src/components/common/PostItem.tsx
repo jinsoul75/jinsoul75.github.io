@@ -18,8 +18,11 @@ export default function PostItem({
 
 export function PostThumbnail({ thumbnailUrl }: { thumbnailUrl: string }) {
   return (
-    <figure className="relative overflow-hidden group">
+    <figure className="overflow-hidden group">
       <Image
+        width={0}
+        height={0}
+        sizes="100vw"
         className="transition-all duration-300 transform group-hover:scale-110"
         src={`${thumbnailUrl}`}
         alt="post-thumbnail"
@@ -40,7 +43,7 @@ export function PostTitle({
   return (
     <h2
       className={cn(
-        `text-2xl bold underline underline-offset-6 hover:underline-offset-6 hover:decoration-4 ${className}`,
+        `text-2xl bold hover:underline hover:underline-offset-2 hover:decoration-2 ${className}`,
       )}
     >
       <Link href={slug}>{title}</Link>
