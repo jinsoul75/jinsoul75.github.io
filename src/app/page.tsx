@@ -30,7 +30,7 @@ export default function Page() {
         <SubTitle>Recent Posts</SubTitle>
         <ul className='grid grid-cols-4 gap-4'>
           {recentPosts.map((blog) => (
-            <MainCard blog={blog} />
+            <MainCard key={blog._id} blog={blog} />
           ))}
         </ul>
       </section>

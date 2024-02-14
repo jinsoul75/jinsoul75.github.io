@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import Image from 'next/image';
+
 import { ReactNode } from 'react';
 import { IoCalendarClearOutline } from 'react-icons/io5';
 import { GoClock } from 'react-icons/go';
@@ -6,24 +8,18 @@ import { cn } from '@/libs/utils';
 
 export default function PostItem({
   children,
-  key,
   className,
 }: {
   children: ReactNode;
-  key: string;
   className?: string;
 }) {
-  return (
-    <article key={key} className={className}>
-      {children}
-    </article>
-  );
+  return <article className={className}>{children}</article>;
 }
 
 export function PostThumbnail({ thumbnailUrl }: { thumbnailUrl: string }) {
   return (
     <figure className="relative overflow-hidden group">
-      <img
+      <Image
         className="transition-all duration-300 transform group-hover:scale-110"
         src={`${thumbnailUrl}`}
         alt="post-thumbnail"
@@ -44,7 +40,7 @@ export function PostTitle({
   return (
     <h2
       className={cn(
-        `text-2xl bold hover:underline hover:underline-offset-6 hover:decoration-4 ${className}`,
+        `text-2xl bold underline underline-offset-6 hover:underline-offset-6 hover:decoration-4 ${className}`,
       )}
     >
       <Link href={slug}>{title}</Link>
@@ -73,7 +69,10 @@ export function PostTags({
       className={cn(`flex flex-wrap place-items-start space-x-2 ${className}`)}
     >
       {tags?.map((tag: string) => (
-        <li className="border border-black rounded-full hover:bg-black hover:text-white">
+        <li
+          key={tag}
+          className="border border-black rounded-full hover:bg-black hover:text-white"
+        >
           <Link href={'/archives'} className="block px-2">
             {tag}
           </Link>
