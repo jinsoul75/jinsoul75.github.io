@@ -24,3 +24,8 @@ export const recentPosts = allBlogPosts.slice(0, 4);
 
 export const getPostsByTag = (tag: string) =>
   [...allBlogPosts].filter((post) => post.tags.includes(decodeURI(tag)));
+
+export const allTags = Array.from(
+  new Set([...allBlogPosts].map((blogPost) => blogPost.tags).flat()),
+);
+
