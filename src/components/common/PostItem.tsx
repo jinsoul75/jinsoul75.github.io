@@ -76,7 +76,7 @@ export function PostTags({
           key={tag}
           className="border border-black rounded-full hover:bg-black hover:text-white"
         >
-          <Link href={'/archives'} className="block px-2">
+          <Link href={`/archives/tags/${tag}`} className="block px-2">
             {tag}
           </Link>
         </li>
