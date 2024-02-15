@@ -3,11 +3,11 @@ import { ParamsProps } from '@/types/types';
 import { getPostsByTag } from '@/constants/dataset';
 import PostList from '@/components/common/PostList';
 import { notFound } from 'next/navigation';
-import { allBlogPosts } from '@/constants/dataset';
+import { allTags } from '@/constants/dataset';
 
-export function generateStaticParams() {
-  return [...allBlogPosts].map((blogPost) => ({
-    slug: blogPost.slugAsParams,
+export async function generateStaticParams() {
+  return [...allTags].map((tag) => ({
+    slug: decodeURI(tag),
   }));
 }
 
