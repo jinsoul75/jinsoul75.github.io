@@ -85,6 +85,10 @@
   background-color: pink;
 }
 
+body {
+  background-color: #f7f8e9;
+}
+
 .prose .anchor:after {
   @apply text-gray-300;
   content: '#';

@@ -46,7 +46,7 @@ export function PostTitle({
         `text-2xl bold hover:underline hover:underline-offset-2 hover:decoration-2 ${className}`,
       )}
     >
-      <Link href={slug}>{title}</Link>
+      <Link href={`/blog/${slug.split('/').slice(-1)}`}>{title}</Link>
     </h2>
   );
 }

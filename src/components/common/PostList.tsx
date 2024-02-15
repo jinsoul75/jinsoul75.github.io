@@ -6,7 +6,6 @@ import dayjs from 'dayjs';
 export default function PostList({ posts }: { posts: any }) {
   const className =
     'grid grid-cols-2 border-t border-t-black border-l border-l-black';
-  
 
   return (
     <section className={className}>
@@ -22,7 +21,7 @@ export default function PostList({ posts }: { posts: any }) {
             key={post._id}
             className="border-r border-r-black border-b border-b-black"
           >
-            <Link href={post.slug}>
+            <Link href={post.slug.split('/').slice(-1)}>
               {isWithThumbnail && (
                 <PostItem.PostThumbnail thumbnailUrl={post.thumbnail} />
               )}

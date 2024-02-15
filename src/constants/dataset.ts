@@ -16,6 +16,8 @@ export const getSeriesPostsBySlug = (slug: string) =>
   );
 
 export const getBlogPostBySlug = (slug: string) =>
-  allBlogPosts.find((blog) => blog.slugAsParams === slug);
+  allBlogPosts.find(
+    (blog) => blog.slugAsParams.split('/').slice(-1)[0] === slug,
+  );
 
 export const recentPosts = allBlogPosts.slice(0, 4);
