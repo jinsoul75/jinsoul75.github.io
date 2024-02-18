@@ -98,3 +98,11 @@ img {
   width: 100%;
   height: auto;
 }
+
+.prose .rehype-code-title {
+  @apply rounded-t-lg border border-b-0 px-5 py-3 text-sm font-bold;
+}
+
+.prose figure {
+  margin-top: 0;
+}

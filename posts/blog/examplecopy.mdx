@@ -6,8 +6,6 @@ tags:
 - 샘플1
 ---
 
-## Table of Contents
-
 최근에 Next.js 프로젝트를 만들어보면서 CSR, SSR의 뿐만 아니라 React Server Component(이하 RSC) 개념과도 깊은 연관이 있음을 알게 되었다.
 
 리액트가 서버 컴포넌트를 제공해 주지 않았을 때를 생각해 본 적이 없어서 (무려 2년도 안 된 일) 그저 Next.js가 React 앱을 SSR해주는 프레임워크정도로만 알고 있었기에 RSC를 공부하면서 Next.js를 이해하는데 도움이 되어 학습한 내용을 기록한다.
@@ -30,7 +28,7 @@ useEffect는 클라이언트서 컴포넌트 생명주기 사이클에 관여하
 
 ## **getServerSideProps**
 
-```tsx
+```tsx:lib/index.ts
 import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
 
 type Repo = {

@@ -13,6 +13,7 @@ import remarkGfm from 'remark-gfm';
 import remarkBreaks from 'remark-breaks';
 import readingTime from 'reading-time';
 import GithubSlugger from 'github-slugger';
+import rehypeCodeTitles from 'rehype-code-titles';
 
 /** @type {import('contentlayer/source-files').ComputedFields} */
 
@@ -117,6 +118,7 @@ export default makeSource({
   mdx: {
     remarkPlugins: [remarkGfm, remarkBreaks],
     rehypePlugins: [
+      rehypeCodeTitles,
       rehypeSlug,
       [rehypePrettyCode, options] as unknown as Pluggable<any[]>,
       [
