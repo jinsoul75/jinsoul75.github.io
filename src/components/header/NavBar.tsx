@@ -3,14 +3,11 @@ import { MENUS, MENU_INFO } from '../../constants/menu';
 
 export default function NavBar() {
   return (
-    <ul className="flex">
+    <ul className="flex space-x-4">
       {MENUS.map((menu, index) => {
         return (
           <li key={`${menu}${index}`}>
-            <LinkItem
-              className={`${index > 0 ? 'p-2' : 'py-2 pr-2'}`}
-              href={MENU_INFO[menu].href}
-            >
+            <LinkItem className="text-gray-600" href={MENU_INFO[menu].href}>
               {menu}
             </LinkItem>
           </li>

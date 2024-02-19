@@ -1,11 +1,11 @@
-export const MENUS = ['HOME', 'BLOG', 'SNIPPETS', 'ARCHIVES', 'PROJECTS'];
+export const MENUS = ['Home', 'Blog', 'Snippets', 'Archives', 'Projects'];
 
 export const MENU_INFO: { [key: string]: { href: string } } = {
-  HOME: { href: '/' },
-  BLOG: { href: '/blog' },
-  SNIPPETS: { href: '/snippets' },
-  ARCHIVES: { href: '/archives' },
-  PROJECTS: { href: '/projects' },
+  Home: { href: '/' },
+  Blog: { href: '/blog' },
+  Snippets: { href: '/snippets' },
+  Archives: { href: '/archives' },
+  Projects: { href: '/projects' },
 };
 
-export const thumbnailCategory = ['projects']
+export const thumbnailCategory = ['projects'];
