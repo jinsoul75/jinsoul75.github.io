@@ -5,6 +5,7 @@ import {
 } from 'contentlayer/source-files';
 
 import { Pluggable } from 'unified';
+import { transformerNotationDiff } from '@shikijs/transformers';
 
 import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
@@ -14,6 +15,7 @@ import remarkBreaks from 'remark-breaks';
 import readingTime from 'reading-time';
 import GithubSlugger from 'github-slugger';
 import rehypeCodeTitles from 'rehype-code-titles';
+import { readFileSync } from 'fs';
 
 /** @type {import('contentlayer/source-files').ComputedFields} */
 
@@ -109,7 +111,9 @@ const Projects = defineDocumentType(() => ({
 }));
 
 const options = {
-  theme: 'one-dark-pro',
+  theme: 'github-dark',
+  transformers: [transformerNotationDiff()],
+  filterMetaString: (string: string) => string.replace(/filename="[^"]*"/, ''),
 };
 
 export default makeSource({
