@@ -43,7 +43,7 @@ export function PostTitle({
   return (
     <h2
       className={cn(
-        `text-2xl bold hover:underline hover:underline-offset-2 hover:decoration-2 ${className}`,
+        `text-2xl font-semibold hover:underline hover:underline-offset-2 hover:decoration-2 ${className}`,
       )}
     >
       <Link href={`/blog/${slug.split('/').slice(-1)}`}>{title}</Link>

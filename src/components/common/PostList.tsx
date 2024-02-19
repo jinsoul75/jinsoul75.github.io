@@ -4,8 +4,7 @@ import { thumbnailCategory } from '@/constants/menu';
 import dayjs from 'dayjs';
 
 export default function PostList({ posts }: { posts: any }) {
-  const className =
-    'grid grid-cols-2 border-t border-t-black border-l border-l-black';
+  const className = 'grid grid-cols-1 gap-4 md:grid-cols-2';
 
   return (
     <section className={className}>
@@ -17,10 +16,7 @@ export default function PostList({ posts }: { posts: any }) {
         const formatDate = dayjs(post.date).format('YY.MM.DD');
 
         return (
-          <PostItem
-            key={post._id}
-            className="border-r border-r-black border-b border-b-black"
-          >
+          <PostItem key={post._id}>
             <Link href={post.slug.split('/').slice(-1)}>
               {isWithThumbnail && (
                 <PostItem.PostThumbnail thumbnailUrl={post.thumbnail} />
