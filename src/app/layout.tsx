@@ -5,6 +5,7 @@ import { cn } from '@/libs/utils';
 import '../styles/globals.css';
 import Footer from '@/components/footer/Footer';
 import Header from '@/components/header/Header';
+import Provider from '@/components/provider/Provider';
 import Loading from './loading';
 
 export const metadata: Metadata = {
@@ -13,17 +14,20 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
-  const bodyStyle =
-    'flex flex-col mx-auto min-h-screen max-w-3xl px-6 lg:max-w-6xl lg:px-8';
+  const bodyStyle = cn(
+    'flex flex-col mx-auto min-h-screen max-w-3xl px-6 lg:max-w-6xl lg:px-8',
+  );
 
   return (
     <html lang="ko">
       <body className={cn(bodyStyle)} suppressHydrationWarning={true}>
-        <Header />
-        <Suspense fallback={<Loading />}>
-          <main className="grow my-5 flex flex-col">{children}</main>
-        </Suspense>
-        <Footer />
+        <Provider>
+          <Header />
+          <Suspense fallback={<Loading />}>
+            <main className="grow my-5 flex flex-col">{children}</main>
+          </Suspense>
+          <Footer />
+        </Provider>
       </body>
     </html>
   );
