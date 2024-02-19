@@ -3,12 +3,12 @@ import { recentPosts } from '@/constants/dataset';
 import Title from '@/components/common/Title';
 import Paragraph from '@/components/common/Paragraph';
 import SubTitle from '@/components/common/SubTitle';
-
 import MainCard from '@/components/card/MainCard';
+import Animation from '@/framer/Animation';
 
 export default function Page() {
   return (
-    <>
+    <Animation>
       <section className="grow">
         <Title>Jinsoul Kim</Title>
         <div className="mb-4">
@@ -28,12 +28,12 @@ export default function Page() {
       </section>
       <section className="grow">
         <SubTitle>Recent Posts</SubTitle>
-        <ul className='grid grid-cols-4 gap-4'>
+        <ul className="grid grid-cols-4 gap-4">
           {recentPosts.map((blog) => (
             <MainCard key={blog._id} blog={blog} />
           ))}
         </ul>
       </section>
-    </>
+    </Animation>
   );
 }
