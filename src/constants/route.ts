@@ -1,6 +1,13 @@
-export const SERIES = {
-  'REACT DEEP DIVE': 'react-deep-dive',
-  'TYPESCRIPT DEEP DIVE': 'typescript-deep-dive',
-} as const;
-
-export const SERIES_NAME = Object.keys(SERIES) as (keyof typeof SERIES)[];
+export const SERIES = [
+  {
+    route: 'javascript-deep-dive',
+    name: 'javascript deep dive',
+    thumbnail: 'https://github.com/voodootikigod/logo.js/raw/master/js.png',
+  },
+  {
+    route: 'react-deep-dive',
+    name: 'react deep dive',
+    thumbnail:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1024px-React-icon.svg.png',
+  },
+];
