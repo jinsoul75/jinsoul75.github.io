@@ -27,9 +27,10 @@ export default function SeriesCard() {
             </div> */}
           <div
             className={cn(
-              'rounded-2xl border border-gray-200',
-              'hover:bg-gray-200',
+              'rounded-2xl border border-gray-200 transition-all',
               'active:bg-gray-100',
+              'hover:bg-gray-200',
+              'hover:scale-95',
             )}
           >
             <Link className="block" href={`blog/series/${series.route}`}>

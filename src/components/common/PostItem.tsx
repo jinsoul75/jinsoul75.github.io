@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 
 import { ReactNode } from 'react';
 import { IoCalendarClearOutline } from 'react-icons/io5';
@@ -9,36 +8,25 @@ import { cn } from '@/libs/utils';
 export default function PostItem({
   children,
   className,
+  slug,
 }: {
   children: ReactNode;
   className?: string;
+  slug: string;
 }) {
-  return <article className={className}>{children}</article>;
-}
-
-export function PostThumbnail({ thumbnailUrl }: { thumbnailUrl: string }) {
   return (
-    <figure className="overflow-hidden group">
-      <Image
-        width={0}
-        height={0}
-        sizes="100vw"
-        className="transition-all duration-300 transform group-hover:scale-110"
-        src={`${thumbnailUrl}`}
-        alt="post-thumbnail"
-      />
-    </figure>
+    <article className={className}>
+      <Link href={`/blog/${slug.split('/').slice(-1)}`}>{children}</Link>
+    </article>
   );
 }
 
 export function PostTitle({
   title,
   className,
-  slug,
 }: {
   title: string;
   className?: string;
-  slug: string;
 }) {
   return (
     <h2
@@ -46,7 +34,7 @@ export function PostTitle({
         `text-2xl font-semibold hover:underline hover:underline-offset-2 hover:decoration-2 ${className}`,
       )}
     >
-      <Link href={`/blog/${slug.split('/').slice(-1)}`}>{title}</Link>
+      {title}
     </h2>
   );
 }
@@ -94,7 +82,6 @@ export function PostReadingTime({ readingTime }: { readingTime: string }) {
   );
 }
 
-PostItem.PostThumbnail = PostThumbnail;
 PostItem.PostTitle = PostTitle;
 PostItem.PostDate = PostDate;
 PostItem.PostTags = PostTags;
