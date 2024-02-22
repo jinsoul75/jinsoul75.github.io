@@ -12,11 +12,11 @@ export default function PostItem({
 }: {
   children: ReactNode;
   className?: string;
-  slug: string;
+  slug?: string;
 }) {
   return (
     <article className={className}>
-      <Link href={`/blog/${slug.split('/').slice(-1)}`}>{children}</Link>
+      <Link href={`/blog/${slug?.split('/').slice(-1)}`}>{children}</Link>
     </article>
   );
 }

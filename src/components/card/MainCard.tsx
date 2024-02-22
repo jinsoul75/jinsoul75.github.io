@@ -5,11 +5,7 @@ export default function MainCard({ blog }: { blog: Blog }) {
   return (
     <li>
       <PostItem className="flex flex-col h-full">
-        <PostItem.PostTitle
-          title={blog.title}
-          className="grow"
-          slug={blog.slug}
-        />
+        <PostItem.PostTitle title={blog.title} className="grow" />
         <PostItem.PostTags tags={blog.tags} className="mt-4" />
       </PostItem>
     </li>
