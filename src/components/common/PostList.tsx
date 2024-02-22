@@ -1,6 +1,4 @@
-import Link from 'next/link';
 import PostItem from './PostItem';
-import { thumbnailCategory } from '@/constants/menu';
 import dayjs from 'dayjs';
 
 export default function PostList({ posts }: { posts: any }) {
@@ -9,19 +7,10 @@ export default function PostList({ posts }: { posts: any }) {
   return (
     <section className={className}>
       {posts.map((post: any) => {
-        const isWithThumbnail = thumbnailCategory.includes(
-          post.slug.split('/')[1],
-        );
-
         const formatDate = dayjs(post.date).format('YY.MM.DD');
 
         return (
           <PostItem key={post._id}>
-            <Link href={post.slug.split('/').slice(-1)}>
-              {isWithThumbnail && (
-                <PostItem.PostThumbnail thumbnailUrl={post.thumbnail} />
-              )}
-            </Link>
             <div className="p-2">
               <PostItem.PostTitle title={post.title} slug={post.slug} />
               <div className="flex mt-8">

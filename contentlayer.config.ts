@@ -15,7 +15,6 @@ import remarkBreaks from 'remark-breaks';
 import readingTime from 'reading-time';
 import GithubSlugger from 'github-slugger';
 import rehypeCodeTitles from 'rehype-code-titles';
-import { readFileSync } from 'fs';
 
 /** @type {import('contentlayer/source-files').ComputedFields} */
 
@@ -102,14 +101,6 @@ export const Blog = defineDocumentType(() => ({
   computedFields,
 }));
 
-const Projects = defineDocumentType(() => ({
-  name: 'Projects',
-  filePathPattern: `projects/**/*.mdx`,
-  contentType: 'mdx',
-  fields,
-  computedFields,
-}));
-
 const options = {
   theme: 'github-dark',
   transformers: [transformerNotationDiff()],
@@ -118,7 +109,7 @@ const options = {
 
 export default makeSource({
   contentDirPath: './posts',
-  documentTypes: [Blog, Projects],
+  documentTypes: [Blog],
   mdx: {
     remarkPlugins: [remarkGfm, remarkBreaks],
     rehypePlugins: [
