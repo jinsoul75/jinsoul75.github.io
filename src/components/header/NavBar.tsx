@@ -3,7 +3,7 @@ import { MENUS, MENU_INFO } from '../../constants/menu';
 
 export default function NavBar() {
   return (
-    <ul className="flex space-x-4">
+    <ul className="space-x-4 hidden sm:flex">
       {MENUS.map((menu, index) => {
         return (
           <li key={`${menu}${index}`}>
