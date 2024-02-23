@@ -45,10 +45,10 @@ export default function Slug({ params }: ParamsProps) {
         <hr className="bg-black mb-6 mt-4 h-px border-0" />
 
         <div className="flex gap-8">
-          <div className="prose">
+          <div className="prose dark:prose-dark">
             <Mdx code={body.code} />
           </div>
-          <aside className="sticky self-start top-[120px] right-6 grow ml-10 mt-10 w-[350px]">
+          <aside className="sticky self-start top-[120px] right-6 grow ml-10 mt-10 w-[350px] hidden lg:block">
             <Toc headings={headings} />
           </aside>
         </div>
@@ -57,10 +57,10 @@ export default function Slug({ params }: ParamsProps) {
       <hr className="bg-black mb-6 mt-4 h-px border-0" />
 
       <Profile />
-      
+
       <hr className="bg-black mb-6 mt-4 h-px border-0" />
 
-      <Reaction/>
+      <Reaction />
     </>
   );
 }

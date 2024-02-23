@@ -2,11 +2,17 @@ import { cn } from '@/libs/utils';
 import PostItem from './PostItem';
 import dayjs from 'dayjs';
 
-export default function PostList({ posts }: { posts: any }) {
-  const className = 'grid grid-cols-1 gap-4 md:grid-cols-2';
-
+export default function PostList({
+  posts,
+  className,
+}: {
+  posts: any;
+  className?: string;
+}) {
   return (
-    <section className={className}>
+    <section
+      className={cn(`grid grid-cols-1 gap-4 md:grid-cols-2 ${className}`)}
+    >
       {posts.map((post: any) => {
         const formatDate = dayjs(post.date).format('YY.MM.DD');
 

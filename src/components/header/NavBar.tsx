@@ -1,5 +1,5 @@
 import LinkItem from '../common/LinkItem';
-import { MENUS, MENU_INFO } from '../../constants/menu';
+import { MENUS, MENU_INFO } from '../../constants/route';
 
 export default function NavBar() {
   return (

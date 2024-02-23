@@ -1,7 +1,7 @@
 import Link from 'next/link';
 // import Image from 'next/image';
 
-import { SERIES } from '@/constants/route';
+import { SERIES, SERIES_INFO } from '@/constants/route';
 // import Animation from '@/framer/Animation';
 import { cn } from '@/libs/utils';
 
@@ -9,7 +9,7 @@ export default function SeriesCard() {
   return (
     <ul className="flex flex-col gap-4 sm:flex-row">
       {SERIES.map((series) => (
-        <li key={series.name}>
+        <li key={series}>
           {/* <div className="relative overflow-hidden group rounded-2xl w-[324px] h-[324px]">
               <Link className="block" href={`blog/series/${series.route}`}>
                 <figure className="overflow-hidden group">
@@ -33,9 +33,9 @@ export default function SeriesCard() {
               'hover:scale-95',
             )}
           >
-            <Link className="block" href={`blog/series/${series.route}`}>
+            <Link className="block" href={`blog/series/${series}`}>
               <div className="font-extrabold text-xl px-2 py-2">
-                {series.name}
+                {SERIES_INFO[series].name}
               </div>
             </Link>
           </div>

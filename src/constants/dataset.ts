@@ -7,7 +7,7 @@ export const allBlogPosts = [...allBlogs].sort((a, b) => {
 });
 
 export const allSeriesPosts = [...allBlogPosts].filter(
-  (blogPost) => blogPost.IsSeries,
+  (blogPost) => blogPost.isSeries,
 );
 
 export const getSeriesPostsBySlug = (slug: string) =>
@@ -28,4 +28,3 @@ export const getPostsByTag = (tag: string) =>
 export const allTags = Array.from(
   new Set([...allBlogPosts].map((blogPost) => blogPost.tags).flat()),
 );
-

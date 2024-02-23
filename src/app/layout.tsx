@@ -19,8 +19,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   );
 
   return (
-    <html lang="ko">
-      <body className={cn(bodyStyle)} suppressHydrationWarning={true}>
+    <html lang="ko" suppressHydrationWarning>
+      <body className={cn(bodyStyle)}>
         <Provider>
           <Header />
           <Suspense fallback={<Loading />}>
