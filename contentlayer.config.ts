@@ -87,7 +87,7 @@ const fields: FieldDefs = {
     type: 'string',
     required: false,
   },
-  IsSeries: {
+  isSeries: {
     type: 'boolean',
     required: false,
   },
@@ -108,7 +108,7 @@ const options = {
 };
 
 export default makeSource({
-  contentDirPath: './posts',
+  contentDirPath: 'posts',
   documentTypes: [Blog],
   mdx: {
     remarkPlugins: [remarkGfm, remarkBreaks],
