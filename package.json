@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@giscus/react": "^2.4.0",
+    "@next/third-parties": "^14.1.0",
     "@notion-render/client": "^0.0.2",
     "@notionhq/client": "^2.2.14",
     "@radix-ui/react-slot": "^1.0.2",

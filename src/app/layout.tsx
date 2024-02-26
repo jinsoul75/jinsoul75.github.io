@@ -1,8 +1,10 @@
 import { Suspense, ReactNode } from 'react';
 import type { Metadata } from 'next';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 import { cn } from '@/libs/utils';
 import '../styles/globals.css';
+
 import Footer from '@/components/footer/Footer';
 import Header from '@/components/header/Header';
 import Provider from '@/components/provider/Provider';
@@ -24,6 +26,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
   return (
     <html lang="ko" suppressHydrationWarning>
+      <GoogleAnalytics gaId={'G-4843GGMST8'} />
       <body className={cn(bodyStyle)}>
         <Provider>
           <Header />
