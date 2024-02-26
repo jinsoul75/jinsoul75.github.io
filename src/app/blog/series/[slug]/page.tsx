@@ -1,9 +1,15 @@
 import Image from 'next/image';
 
 import { ParamsProps } from '@/types/types';
-import { SERIES_INFO } from '@/constants/route';
+import { SERIES, SERIES_INFO } from '@/constants/route';
 import { getSeriesPostsBySlug } from '@/constants/dataset';
 import PostList from '@/components/common/PostList';
+
+export async function generateStaticParams() {
+  return [...SERIES].map((series) => ({
+    slug: series,
+  }));
+}
 
 export default function Series({ params }: ParamsProps) {
   const seriesPosts = getSeriesPostsBySlug(params?.slug);
