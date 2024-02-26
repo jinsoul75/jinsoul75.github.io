@@ -16,7 +16,7 @@ export default function LinkItem({
   ...props
 }: LinkItemProps) {
   const pathname = usePathname();
-  const firstPathname = pathname.split('/')[1];
+  const firstPathname = pathname?.split('/')[1];
   const isActive = href === `/${firstPathname}`;
 
   return (
