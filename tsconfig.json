@@ -14,6 +14,8 @@
         "./.contentlayer/generated"
       ]
     },
+    "target": "es2015",
+    "downlevelIteration": true,
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,

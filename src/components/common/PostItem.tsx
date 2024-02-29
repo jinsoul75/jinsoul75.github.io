@@ -62,7 +62,7 @@ export function PostTags({
       {tags?.map((tag: string) => (
         <li
           key={tag}
-          className="border border-black rounded-full hover:bg-black hover:text-white"
+          className="border border-black rounded-full hover:bg-black hover:text-white dark:bg-black dark:text-white dark:border-white  dark:hover:bg-white dark:hover:text-black"
         >
           <Link href={`/archives/tags/${tag}`} className="block px-2">
             {tag}

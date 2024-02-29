@@ -10,6 +10,20 @@ export const allSeriesPosts = [...allBlogPosts].filter(
   (blogPost) => blogPost.isSeries,
 );
 
+export const postYears = [
+  ...new Set(
+    [...allBlogPosts]
+      .map((blogPost) => blogPost.slugAsParams.split('/')[0])
+      .filter((postYears) => Number(postYears)),
+  ),
+];
+
+export const getPostsByYear = (postYear: string) => {
+  return [...allBlogPosts].filter(
+    (blogPost) => blogPost.slugAsParams.split('/')[0] === postYear,
+  );
+};
+
 export const getSeriesPostsBySlug = (slug: string) =>
   [...allSeriesPosts].filter(
     (blogPost) => blogPost.slugAsParams.split('/')[1] === slug,
