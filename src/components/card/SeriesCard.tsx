@@ -11,7 +11,7 @@ export default function SeriesCard() {
       {SERIES.map((series) => (
         <li key={series} className="group">
           <Link className="block" href={`blog/series/${series}`}>
-            <div className="flex flex-col items-center transition-all duration-300 transform-gpu hover:scale-105">
+            <div className="flex flex-col items-center transition-all duration-300 transform-gpu">
               <div className="relative overflow-hidden group rounded-2xl w-[324px] h-[324px]">
                 <figure className="overflow-hidden group">
                   <div className="w-full h-full">

@@ -4,7 +4,6 @@ import { CiSearch } from 'react-icons/ci';
 export default function SearchBar() {
   const className = cn(
     'bg-gray-100 p-2 w-full flex',
-    'hover:ring-1',
     'focus:ring-1',
     'ring-black',
     'outline-none',

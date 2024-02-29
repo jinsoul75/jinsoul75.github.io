@@ -8,7 +8,7 @@ export default function NavBar() {
         return (
           <li
             key={`${menu}${index}`}
-            className="transition duration-300 hover:bg-gray-200 rounded-xl p-2"
+            className="transition duration-300 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-xl p-2"
           >
             <LinkItem
               className="text-gray-600 block"
