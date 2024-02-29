@@ -18,19 +18,17 @@ export default function Series({ params }: ParamsProps) {
 
   return (
     <div className="flex gap-4">
-      <div>
-        <figure className="w-1/3 h-1/3">
-          <Image
-            src={SERIES_INFO[slug].thumbnail}
-            alt={`${slug}-thumbnail`}
-            width={300}
-            height={300}
-            className="rounded-xl"
-          />
-        </figure>
-        <div className="font-extrabold">{SERIES_INFO[slug].name}</div>
-        <PostList posts={seriesPosts} className="flex flex-col grow" />
-      </div>
+      <figure className="w-1/3 h-1/3">
+        <Image
+          src={SERIES_INFO[slug].thumbnail}
+          alt={`${slug}-thumbnail`}
+          width={300}
+          height={300}
+          className="rounded-xl"
+        />
+      </figure>
+      <div className="font-extrabold">{SERIES_INFO[slug].name}</div>
+      <PostList posts={seriesPosts} className="flex flex-col grow" />
     </div>
   );
 }

@@ -1,44 +1,35 @@
 import Link from 'next/link';
-// import Image from 'next/image';
+import Image from 'next/image';
 
 import { SERIES, SERIES_INFO } from '@/constants/route';
-// import Animation from '@/framer/Animation';
-import { cn } from '@/libs/utils';
+
+import { IoBookmarksOutline } from 'react-icons/io5';
 
 export default function SeriesCard() {
   return (
-    <ul className="flex flex-col gap-4 sm:flex-row">
+    <ul className="flex flex-col gap-4 sm:flex-row mb-4">
       {SERIES.map((series) => (
-        <li key={series}>
-          {/* <div className="relative overflow-hidden group rounded-2xl w-[324px] h-[324px]">
-              <Link className="block" href={`blog/series/${series.route}`}>
+        <li key={series} className="group">
+          <Link className="block" href={`blog/series/${series}`}>
+            <div className="flex flex-col items-center transition-all duration-300 transform-gpu hover:scale-105">
+              <div className="relative overflow-hidden group rounded-2xl w-[324px] h-[324px]">
                 <figure className="overflow-hidden group">
-                  <Image
-                    fill={true}
-                    className="transition-all duration-300 transform group-hover:scale-110 rounded-2xl h-full"
-                    src={series.thumbnail}
-                    alt="series-thumbnail"
-                  />
+                  <div className="w-full h-full">
+                    <Image
+                      fill={true}
+                      className="w-full h-full transition-transform duration-300 transform group-hover:scale-110"
+                      src={SERIES_INFO[series].thumbnail}
+                      alt="series-thumbnail"
+                    />
+                  </div>
                 </figure>
-                <div className="absolute top-2/1 left-10 font-extrabold text-5xl transition-all duration-300">
-                  {series.name}
-                </div>
-              </Link>
-            </div> */}
-          <div
-            className={cn(
-              'rounded-2xl border border-gray-200 transition-all',
-              'active:bg-gray-100',
-              'hover:bg-gray-200',
-              'hover:scale-95',
-            )}
-          >
-            <Link className="block" href={`blog/series/${series}`}>
-              <div className="font-extrabold text-xl px-2 py-2">
-                {SERIES_INFO[series].name}
               </div>
-            </Link>
-          </div>
+              <div className="flex items-center gap-1 mt-2">
+                <IoBookmarksOutline />
+                <div className="font-extrabold">{SERIES_INFO[series].name}</div>
+              </div>
+            </div>
+          </Link>
         </li>
       ))}
     </ul>

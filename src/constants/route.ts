@@ -16,16 +16,17 @@ interface SeriesCollection {
   [key: string]: SeriesItem;
 }
 
-export const SERIES = ['javascript-deep-dive', 'react-deep-dive'];
-
 export const SERIES_INFO: SeriesCollection = {
-  'javascript-deep-dive': {
-    name: 'javascript deep dive',
-    thumbnail: 'https://github.com/voodootikigod/logo.js/raw/master/js.png',
-  },
   'react-deep-dive': {
     name: 'react deep dive',
     thumbnail:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1024px-React-icon.svg.png',
+      'https://images.unsplash.com/photo-1625305263117-54a72da56260?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZGl2ZXxlbnwwfHwwfHx8MA%3D%3D',
+  },
+  blog: {
+    name: 'Next.js 블로그 만들기',
+    thumbnail:
+      'https://plus.unsplash.com/premium_photo-1678567671234-388cf4fa0224?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGJsb2d8ZW58MHx8MHx8fDA%3D',
   },
 };
+
+export const SERIES = Object.keys(SERIES_INFO);
