@@ -12,7 +12,7 @@ export default function PostItem({
 }: {
   children: ReactNode;
   className?: string;
-  slugAsParams: string;
+  slugAsParams?: string;
 }) {
   return (
     <article className={className}>
