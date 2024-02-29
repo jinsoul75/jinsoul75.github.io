@@ -12,7 +12,7 @@ export const allSeriesPosts = [...allBlogPosts].filter(
 
 export const getSeriesPostsBySlug = (slug: string) =>
   [...allSeriesPosts].filter(
-    (blogPost) => blogPost.slugAsParams.split('/')[0] === slug,
+    (blogPost) => blogPost.slugAsParams.split('/')[1] === slug,
   );
 
 export const getBlogPostBySlug = (slug: string) =>

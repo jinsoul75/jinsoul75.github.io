@@ -29,7 +29,7 @@ export default function Series({ params }: ParamsProps) {
           />
         </figure>
         <div className="font-extrabold">{SERIES_INFO[slug].name}</div>
-        <PostList posts={seriesPosts} className="flex flex-col grow " />
+        <PostList posts={seriesPosts} className="flex flex-col grow" />
       </div>
     </div>
   );

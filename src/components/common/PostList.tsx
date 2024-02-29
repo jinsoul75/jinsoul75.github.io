@@ -19,7 +19,7 @@ export default function PostList({
         return (
           <PostItem
             key={post._id}
-            slug={post.slug}
+            slugAsParams={post.slugAsParams}
             className={cn(
               'rounded-lg p-4 transition-transform duration-300 transform',
               'hover:-translate-y-1',

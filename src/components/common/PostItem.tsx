@@ -8,15 +8,15 @@ import { cn } from '@/libs/utils';
 export default function PostItem({
   children,
   className,
-  slug,
+  slugAsParams,
 }: {
   children: ReactNode;
   className?: string;
-  slug?: string;
+  slugAsParams: string;
 }) {
   return (
     <article className={className}>
-      <Link href={`/blog/${slug?.split('/').slice(-1)}`}>{children}</Link>
+      <Link href={`/blog/${slugAsParams}`}>{children}</Link>
     </article>
   );
 }

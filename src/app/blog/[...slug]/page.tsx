@@ -23,11 +23,11 @@ export async function generateStaticParams() {
 }
 
 export default function Slug({ params }: ParamsProps) {
-  console.log(
-    [...allBlogPosts].map((blogPost) => ({
-      slug: blogPost.slugAsParams,
-    })),
-  );
+  // console.log(
+  //   [...allBlogPosts].map((blogPost) => ({
+  //     slug: blogPost.slugAsParams,
+  //   })),
+  // );
 
   const post = getBlogPostBySlug(params.slug[params.slug.length - 1]);
 
