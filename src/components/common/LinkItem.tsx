@@ -22,7 +22,7 @@ export default function LinkItem({
   return (
     <Link
       href={href}
-      className={`${cn(className, { 'font-bold': isActive, 'text-black': isActive })}`}
+      className={`${cn(className, 'dark:text-white', { 'font-extrabold': isActive, 'text-black dark:text-yellow-400': isActive })}`}
       {...props}
     >
       {children}

@@ -20,12 +20,22 @@ export default function ThemeToggle({ className }: ThemeToggleProps) {
     return null;
   }
 
+  const hoverColor = 'hover:text-yellow-300';
+
   return (
-    <button className={`cursor-pointer ${className}`}>
+    <button className={`cursor-pointer hover:scale-125 ${className}`}>
       {theme === 'dark' ? (
-        <FaRegSun onClick={() => setTheme('light')} size={24} />
+        <FaRegSun
+          onClick={() => setTheme('light')}
+          size={24}
+          className={hoverColor}
+        />
       ) : (
-        <FaMoon onClick={() => setTheme('dark')} size={24} />
+        <FaMoon
+          onClick={() => setTheme('dark')}
+          size={24}
+          className={hoverColor}
+        />
       )}
     </button>
   );
