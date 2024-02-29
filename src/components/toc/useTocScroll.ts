@@ -22,7 +22,7 @@ export default function useTocScroll(tableOfContents: any) {
       if (!headings) return;
 
       const NAV_TOP = 24;
-      const TARGET_TOP = 100;
+      const TARGET_TOP = 200;
       const top = window.scrollY - NAV_TOP + TARGET_TOP;
 
       let current: typeof currentSectionSlug = undefined;
