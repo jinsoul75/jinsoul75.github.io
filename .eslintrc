@@ -2,6 +2,7 @@
 	"env": {
 		"es6": true
 	},
+	"ignorePatterns": ["tailwind.config.js"],
 	"extends": ["react-app", "eslint:recommended", "prettier", "next"],
 	"rules": {
 		"no-multiple-empty-lines": "error",
