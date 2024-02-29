@@ -15,6 +15,7 @@ import Toc from '@/components/toc/Toc';
 import ProgressBar from '@/components/progressBar/ProgressBar';
 import Profile from '@/components/profile/Profile';
 import Reaction from '@/components/giscus/Giscus';
+import Hr from '@/components/common/Hr';
 
 export async function generateStaticParams() {
   return [...allBlogPosts].map((blogPost) => ({
@@ -48,7 +49,7 @@ export default function Slug({ params }: ParamsProps) {
           <PostTags tags={tags} />
         </div>
 
-        <hr className="bg-black mb-6 mt-4 h-px border-0" />
+        <Hr />
 
         <div className="flex gap-8">
           <div className="prose dark:prose-dark">
@@ -60,11 +61,11 @@ export default function Slug({ params }: ParamsProps) {
         </div>
       </article>
 
-      <hr className="bg-black mb-6 mt-4 h-px border-0" />
+      <Hr />
 
       <Profile />
 
-      <hr className="bg-black mb-6 mt-4 h-px border-0" />
+      <Hr />
 
       <Reaction />
     </>

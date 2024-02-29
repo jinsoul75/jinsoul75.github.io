@@ -4,6 +4,8 @@ import Link from 'next/link';
 import useTocScroll from './useTocScroll';
 import { cn } from '@/libs/utils';
 
+import Hr from '../common/Hr';
+
 interface Headings {
   level: string;
   text: string;
@@ -17,7 +19,7 @@ export default function Toc({ headings }: { headings: Headings[] }) {
     <div className="border border-black p-4 flex flex-col">
       <div className="text-2xl font-extrabold">On this page</div>
 
-      <hr className="bg-black mb-6 mt-4 h-px border-0" />
+      <Hr />
 
       <ul className="space-y-4">
         {headings.map((heading) => (
