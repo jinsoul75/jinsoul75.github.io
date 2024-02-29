@@ -1,30 +1,25 @@
 export default function Loading() {
   return (
-    <div className="mt-4 flex flex-col gap-4">
-      <div className="bg-secondary h-14 w-14 rounded-md"></div>
-      <div className="bg-secondary h-10 w-1/6 rounded"></div>
-      <div className="bg-secondary h-8 w-1/2 rounded"></div>
-
-      <div className="mt-12 grid grid-cols-1 gap-10 md:grid-cols-2">
-        <div className="flex flex-col gap-2">
-          <div className="bg-secondary h-64 rounded-lg"></div>
-          <div className="bg-secondary h-8 rounded"></div>
-          <div className="bg-secondary h-8 rounded"></div>
+    <div className="flex flex-col gap-4 animate-pulse">
+      <div className="flex flex-col gap-4">
+        <div className="w-20 h-10 bg-gray-200"></div>
+        <div className="w-24 h-6 bg-gray-200"></div>
+        <div className="w-full h-6 bg-gray-200"></div>
+      </div>
+      <div className="flex flex-col gap-4">
+        <div className="w-20 h-6 bg-gray-200"></div>
+        <div className="flex gap-4">
+          <div className="w-60 h-60 bg-gray-200"></div>
+          <div className="w-60 h-60 bg-gray-200"></div>
         </div>
-        <div className="flex flex-col gap-2">
-          <div className="bg-secondary h-64 rounded-lg"></div>
-          <div className="bg-secondary h-8 rounded"></div>
-          <div className="bg-secondary h-8 rounded"></div>
-        </div>
-        <div className="flex flex-col gap-2">
-          <div className="bg-secondary h-64 rounded-lg"></div>
-          <div className="bg-secondary h-8 rounded"></div>
-          <div className="bg-secondary h-8 rounded"></div>
-        </div>
-        <div className="flex flex-col gap-2">
-          <div className="bg-secondary h-64 rounded-lg"></div>
-          <div className="bg-secondary h-8 rounded"></div>
-          <div className="bg-secondary h-8 rounded"></div>
+      </div>
+      <div className="flex flex-col gap-4">
+        <div className="w-20 h-6 bg-gray-200"></div>
+        <div className="grid grid-cols-2 gap-4">
+          <div className="h-20 bg-gray-200"></div>
+          <div className="h-20 bg-gray-200"></div>
+          <div className="h-20 bg-gray-200"></div>
+          <div className="h-20 bg-gray-200"></div>
         </div>
       </div>
     </div>
