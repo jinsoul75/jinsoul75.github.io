@@ -31,7 +31,7 @@ export default function ProgressBar() {
     <progress
       value={progress}
       max={100}
-      className="fixed top-0 w-full inset-x-0 border-b border-b-white [&::-webkit-progress-bar]:bg-white  [&::-webkit-progress-value]:bg-black "
+      className="fixed top-0 w-full z-20 inset-x-0 border-b border-b-white [&::-webkit-progress-bar]:bg-white  [&::-webkit-progress-value]:bg-black "
     ></progress>
   );
 }

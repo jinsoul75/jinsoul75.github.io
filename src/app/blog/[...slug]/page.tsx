@@ -18,12 +18,18 @@ import Reaction from '@/components/giscus/Giscus';
 
 export async function generateStaticParams() {
   return [...allBlogPosts].map((blogPost) => ({
-    slug: blogPost.slugAsParams,
+    slug: blogPost.slugAsParams.split('/'),
   }));
 }
 
 export default function Slug({ params }: ParamsProps) {
-  const post = getBlogPostBySlug(params.slug);
+  console.log(
+    [...allBlogPosts].map((blogPost) => ({
+      slug: blogPost.slugAsParams,
+    })),
+  );
+
+  const post = getBlogPostBySlug(params.slug[params.slug.length - 1]);
 
   if (!post) return notFound();
 

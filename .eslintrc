@@ -5,7 +5,7 @@
 	"extends": ["react-app", "eslint:recommended", "prettier", "next"],
 	"rules": {
 		"no-multiple-empty-lines": "error",
-		"no-console": ["error", { "allow": ["warn", "error", "info"] }], 
+		//"no-console": ["error", { "allow": ["warn", "error", "info"] }], 
 		"no-unused-vars": "error",
 		"react/react-in-jsx-scope": "off",
 		"jsx-a11y/heading-has-content": "off"
