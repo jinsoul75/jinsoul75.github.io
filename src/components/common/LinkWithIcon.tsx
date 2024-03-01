@@ -2,7 +2,7 @@ import { cn } from '@/libs/utils';
 import Link from 'next/link';
 import { ReactNode } from 'react';
 
-export default function LinkWithArrow({
+export default function LinkWithIcon({
   href,
   children,
   className,

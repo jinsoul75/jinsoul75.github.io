@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 interface ParagraphProps {
-  className: string;
+  className?: string;
   children: ReactNode;
 }
 

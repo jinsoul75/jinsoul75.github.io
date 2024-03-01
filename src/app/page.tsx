@@ -1,39 +1,70 @@
-import { recentPosts } from '@/constants/dataset';
+import Image from 'next/image';
 
 import Title from '@/components/common/Title';
 import Paragraph from '@/components/common/Paragraph';
-import SubTitle from '@/components/common/SubTitle';
-import MainCard from '@/components/card/MainCard';
 import Animation from '@/framer/Animation';
+import LinkWithIcon from '@/components/common/LinkWithIcon';
+
+import { FaRunning } from 'react-icons/fa';
 
 export default function Page() {
   return (
-    <Animation>
+    <div className="flex flex-col gap-2">
       <section className="grow">
         <Title>Jinsoul Kim</Title>
-        <div className="mb-4">
-          안녕하세요{' '}
-          <span className="font-bold text-2xl">Frontend Developer 김진솔</span>{' '}
-          입니다.
-        </div>
-        <Paragraph className="">
-          ✔️ 호기심을 가지고 깊이 탐구 하는것
-          <br />
-          ✔️ 문제를 정의하고 해결하는 것<br />
-          ✔️ 그 과정에서 얻은 지식을 공유하고 함께 성장하는것
-        </Paragraph>
-        <div className="my-4">
-          위와 같은 가치를 가지고 꾸준한 성장을 이뤄나가고 있습니다.
-        </div>
+        <Paragraph>Hi👋🏻 I am a frontend developer using React✨</Paragraph>
+        <Paragraph>Welcome to my Blog🙋🏻‍♀️</Paragraph>
       </section>
-      <section className="grow">
-        <SubTitle>Recent Posts</SubTitle>
-        <ul className="grid grid-cols-4 gap-4">
-          {recentPosts.map((blog) => (
-            <MainCard key={blog._id} blog={blog} />
-          ))}
-        </ul>
-      </section>
-    </Animation>
+
+      <Title>Featured</Title>
+      <Animation>
+        <div className="flex flex-col gap-2">
+          <div className="grid grid-cols-3 gap-2">
+            <Image
+              className="rounded-xl"
+              width={387}
+              height={580}
+              src="https://images.unsplash.com/photo-1708936116644-decc9e468248?q=80&w=2863&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="서핑하는바다"
+            />
+            <Image
+              className="rounded-xl"
+              width={387}
+              height={580}
+              src="https://images.unsplash.com/photo-1708936116644-decc9e468248?q=80&w=2863&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="서핑하는바다"
+            />
+            <Image
+              className="rounded-xl"
+              width={387}
+              height={580}
+              src="https://images.unsplash.com/photo-1708936116644-decc9e468248?q=80&w=2863&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="서핑하는바다"
+            />
+          </div>
+          <div className="flex justify-end">
+            <LinkWithIcon
+              href="/blog"
+              className="inline-flex items-center gap-1 underline hover:font-bold"
+            >
+              Wanna See More?
+              <FaRunning />
+            </LinkWithIcon>
+          </div>
+        </div>
+      </Animation>
+    </div>
   );
+}
+
+{
+  /* <section className="grow">
+<SubTitle>Recent Posts</SubTitle>
+<ul className="grid grid-cols-4 gap-4">
+  {recentPosts.map((blog) => (
+    <MainCard key={blog._id} blog={blog} />
+  ))}
+</ul>
+
+</section> */
 }
