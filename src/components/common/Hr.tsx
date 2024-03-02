@@ -5,5 +5,7 @@ interface ClassNameProp {
 }
 
 export default function Hr({ className }: ClassNameProp) {
-  return <hr className={cn(`bg-black mb-6 mt-4 h-px border-0 ${className}`)} />;
+  return (
+    <hr className={cn(`bg-gray-200 mb-6 mt-4 h-px border-0 ${className}`)} />
+  );
 }
