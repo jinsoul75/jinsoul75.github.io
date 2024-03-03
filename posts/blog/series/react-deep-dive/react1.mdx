@@ -7,4 +7,289 @@ tags:
 isSeries: true
 ---
 
-### Compound는 무슨 뜻인가요?
+# React의 동등비교
+
+리액트의 랜더링이 일어나는 이유중 하나는 props의 `동등 비교`에 따른 결과입니다.
+
+리액트는 객체를 ****`얕은 비교`하여 같은 객체인지 확인합니다.
+
+이 얕은 비교가 리액트에서 어떻게 이루어지는지 알아보겠습니다.
+
+# JavaScript의 값의 비교
+
+리액트 코드에 들어가기에 앞서 비교원리의 기본이 되는
+
+자바스크립트의 값 비교에 대해서 짚고 넘어가겠습니다.
+
+자바스크립트에서 값의 비교는 **값의 타입과 비교 연산자**에 따라 다르게 이루어집니다.
+
+여기서는 일치 연산자(===)만 짚고 넘어가 보겠습니다.
+
+### 원시타입
+
+```tsx
+let val1 = 'react'
+let val2 = val1
+let val3 = 'react'
+
+console.log(val1 === val2) // true
+console.log(val1 === val3) // true
+```
+
+원시타입은 메모리에 값 자체가 저장됩니다.
+
+**값을 비교**하기 때문에 값을 전달하는 방식이 아닌 각각 선언하는 방식으로도 동일한 결과가 나옵니다.
+
+### 참조타입
+
+```tsx
+let obj1 = {
+	key: 'react'
+}
+
+let obj2 = {
+	key: 'react'
+}
+
+let obj3 = obj1
+
+console.log(obj1 === obj2) //false
+console.log(obj1.key === obj2.key) //true
+console.log(obj1 === obj3) // true
+```
+
+객체타입은 메모리에 참조값이 저장됩니다.
+
+값을 복사할 때도 값이 아닌 참조값을 전달하게 됩니다.
+
+## Object.is
+
+[Object.is](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is)는 ES6에서 새로 도입된 비교 문법입니다.
+
+일치 비교 (===)가 의도대로 동작하지 않는 경우에 사용할 수 있습니다.
+
+```tsx
+-0 === +0 // true
+Object.is(-0, +0) // false
+
+Number.NaN === NaN // false
+Object.is(Number.NaN, NaN) //true
+
+NaN === 0/0 // false
+Object.is(NaN, 0/0) // true
+```
+
+하지만 객체간의 비교는 여전히 일치 비교(===)와 같은 동작을 합니다.
+
+```tsx
+Object.is({},{}) // false
+
+const obj1 = {
+	key: 'react',
+}
+
+const obj2 = obj1
+
+Object.is(obj1, obj2) //true
+obj1 === obj2 //true
+```
+
+# 리액트에서 동등비교
+
+리액트에서는 동등비교(==)나 일치 비교(===)가 아닌 `Object.is`로 비교합니다.
+
+`Object.is`는 **ES6**문법이기 때문에 리액트에서는 이를 구현한 **폴리필**을 함께 사용합니다.
+
+> **폴리필**
+웹 개발에서 특정 기능이나 API를 지원하지 않는 구형 브라우저에 대응하기 위해 사용되는 코드 조각
+> 
+
+```tsx
+function is(x: any, y:any){
+	return(
+		(x === y && (x!==0 || 1/x === 1/y)) || (x !== x && y !== y)
+	)
+}
+
+// 런타임에서 Object.is가 존재하면 그것을 사용하고 아니라면 위 함수를 사용합니다.
+const objectIs: (x: any, y:any) => boolean =
+	typeof Object.is === 'function' ? Object.is : is
+
+export default objectIs
+```
+
+리액트에서는 `ObjectIs`를 바탕으로 동등비교를 하는 `shallowEqual` 이라는 함수를 만들어 사용합니다.
+
+`shallowEqual`은 의존성 비교 등 리액트의 **동등 비교**가 필요할 때 사용됩니다.
+
+```tsx
+import is from './objectIs';
+
+// Object.prototype.hasOwnProperty
+// 객체에 특정 프로퍼티가 있는지 확인하는 메서드
+import hasOwnProperty from './hasOwnProperty';
+
+// 주어진 객체의 키를 순회하면서 두 값이 엄격한 동등성을 가지는지 확인하고
+// 다른 값이 있다면 false를 반환합니다.
+// 모든 키의 값이 동일하다면 true를 반환합니다.
+function shallowEqual(objA: mixed, objB: mixed): boolean {
+  if (is(objA, objB)) {
+    return true;
+  }
+
+  if (
+    typeof objA !== 'object' ||
+    objA === null ||
+    typeof objB !== 'object' ||
+    objB === null
+  ) {
+    return false;
+  }
+
+// 각 키의 배열을 꺼내서 
+  const keysA = Object.keys(objA);
+  const keysB = Object.keys(objB);
+
+// 배열의 길이가 다르면 false
+  if (keysA.length !== keysB.length) {
+    return false;
+  }
+
+// A의 키를 기준으로, B에 같은 키가 있는지, 값이 같은지 확인합니다.
+  for (let i = 0; i < keysA.length; i++) {
+    const currentKey = keysA[i];
+    if (
+      !hasOwnProperty.call(objB, currentKey) ||
+      !is(objA[currentKey], objB[currentKey])
+    ) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+export default shallowEqual;
+```
+
+리액트에서는 `Object.is`로 먼저 같은 참조값을 가지는지 확인한 후
+
+`Object.is`가 수행하지 못하는 **얕은 비교**를 한번 더 수행합니다.
+
+# 깊은 비교 문제
+
+```tsx
+import { React, memo, useEffect, useState } from "react";
+
+const Component = memo((props) => {
+  useEffect(() => {
+    console.log("Component has been rendered!");
+  });
+
+  return <h1>{props.counter}</h1>;
+});
+//Component는 onClick이벤트로 App의 상태가 변경되더라도
+//원시값인 100이 전달되고 있으므로 리랜더링이 일어나지 않는다.
+
+const DeeperComponent = memo((props) => {
+  useEffect(() => {
+    console.log("DeeperComponent has been rerendered!");
+  });
+
+  return <h1>{props.counter.counter}</h1>;
+});
+//반면에 DeeperComponent는 App컴포넌트가 리랜더링이되면서
+//새로운 메모리주소(참조값)을 가지므로 memo()함수로 메모이제이션 하였더라도
+//shallowEqual에서 false를 반환하므로 동등하지 않다고 판단하여 리렌더링이 일어난다.
+
+export default function App() {
+  const [, setCounter] = useState(0);
+
+  function handleClick() {
+    setCounter((prev) => prev + 1);
+  }
+
+  return (
+    <div>
+      <Component counter={100} /> // props가 원시타입
+      <DeeperComponent counter={{ counter: 100 }} /> // props가 객체타입
+      <button onClick={handleClick}>+</button>
+    </div>
+  );
+}
+```
+
+![Feb-21-2024 13-01-31.gif](https://prod-files-secure.s3.us-west-2.amazonaws.com/49ba5954-2cfc-48fc-8ccc-1702dd703bf5/75a8b190-0ce3-443a-b7f1-22b445eb8030/Feb-21-2024_13-01-31.gif)
+
+조금 더 부연설명을 하자면 `DeeperComponent` 는 props로 아래와 같은 객체를 받습니다.
+
+1 depth까지는 얕은 비교로 동등하지만 2depth의 값이 참조타입이기 때문에
+
+App이 리렌더링시 새로운 참조값을 가지게 됩니다.
+
+```tsx
+{
+	props: {
+		counter: { 
+			counter: 100; // 이 property의 참조값이 달라져서 리렌더링이 일어난다.
+		}
+	}
+}
+```
+
+만약 내부 property들을 모두 비교하여 동등한지 확인하려면 재귀를 통해 모든 depth를 확인해야 할 것입니다.
+
+props의 모든 property의 값의 모든 depth를 비교하게된다면 성능적으로 큰 문제가 될 것입니다.
+
+# useMemo로 리랜더링 방지하기
+
+리액트는 정말 세심하게 잘 만들어진 라이브러리 입니다.
+
+`shallowEqual` 을 통해 얕은 비교만으로 비교하기 어려운 객체의 값을 
+
+개발자가 코드 작성단계에서 메모이제이션 할 수 있습니다.
+
+```tsx
+export default function App() {
+  const [, setCounter] = useState(0);
+
+  function handleClick() {
+    setCounter((prev) => prev + 1);
+  }
+
+ // useMemo로 객체 참조값 메모이제이션
+  const memoizedObject = useMemo(() => ({ counter: 100 }), []);
+
+  return (
+    <div>
+      <Component counter={100} />
+      <DeeperComponent counter={memoizedObject} />
+      <button onClick={handleClick}>+</button>
+    </div>
+  );
+}
+```
+
+![Feb-21-2024 15-16-24.gif](https://prod-files-secure.s3.us-west-2.amazonaws.com/49ba5954-2cfc-48fc-8ccc-1702dd703bf5/811c57d6-0061-40b3-b9ef-a7f9abd0f279/Feb-21-2024_15-16-24.gif)
+
+하지만 `useMemo` 또한 메모리에 저장하는 방법이라
+
+특별히 무거운 연산이 아니고서야 메모리에 부담을 덜기 위해
+
+[사용을 지양하는것을 권장](https://react.dev/reference/react/useMemo#should-you-add-usememo-everywhere)하고 있습니다.
+
+# 마무리
+
+리액트 19버전 출시를 앞두고 프론트엔드 세계가 떠들썩(?) 합니다.
+
+`useMemo` 같은 메모이제이션 API들은 리액트를 공부하면서
+
+존재나 개념은 알고는 있었지만 막상 적용하기 어려운 부분이 있었는데요,
+
+[리액트 공식 블로그](https://react.dev/blog/2024/02/15/react-labs-what-we-have-been-working-on-february-2024#react-compiler)에 따르면 리액트 19버전 부터는 리액트 컴파일러가
+
+이러한 메모이제이션을 수행해준다고 합니다.
+
+생산성과 어플리케이션 성능 향상에 큰 영향을 미칠것 같네요.
+
+읽어주셔서 감사합니다.
