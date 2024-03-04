@@ -71,19 +71,40 @@ module.exports = {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
+      typography: (theme) => ({
+        default: {
+          css: {
+            color: theme('colors.gray.900'),
+
+            a: {
+              color: theme('colors.blue.500'),
+              '&:hover': {
+                color: theme('colors.blue.700'),
+              },
+            },
+          },
+        },
+
+        dark: {
+          css: {
+            color: theme('colors.gray.100'),
+
+            a: {
+              color: theme('colors.blue.100'),
+              '&:hover': {
+                color: theme('colors.blue.100'),
+              },
+            },
+          },
+        },
+      }),
     },
   },
   darkMode: 'class',
   variants: {
-    typography: (theme) => ({
-      DEFAULT: {
-        css: {
-          'h1,h2,h3,h4': {
-            'scroll-margin-top': spacing[32],
-          },
-        },
-      },
-    }),
+    extend: {
+      typography: ['dark'],
+    },
   },
   plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')],
 };

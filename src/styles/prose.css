@@ -3,6 +3,10 @@
   content: '#';
 }
 
+.prose .anchor {
+  @apply dark:text-gray-300;
+}
+
 .prose pre > code {
   display: grid;
 }
@@ -37,12 +41,15 @@
   @apply rounded-t-lg border border-b-0 border-black px-5 py-3 text-sm font-bold bg-white relative top-2;
 }
 
+.prose h2,
+.prose h3,{
+  @apply dark:text-white
+}
 .prose :not(pre) > code::before,
 .prose :not(pre) > code::after {
   display: none;
 }
- 
-/* inline code block style */
+
 .prose :not(pre) > code {
-  @apply dark:bg-gray-900 bg-white border border-gray-200 dark:border-gray-700 text-sm font-normal align-middle py-0.5 px-1 rounded;
+  @apply dark:bg-gray-500 dark:text-white bg-white border border-gray-200 dark:border-gray-700 text-sm font-normal align-middle py-0.5 px-1 rounded;
 }

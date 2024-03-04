@@ -46,7 +46,7 @@ export default function Slug({ params }: ParamsProps) {
         <Hr />
 
         <div className="flex gap-8">
-          <div className="prose dark:prose-dark">
+          <div className="prose w-full max-w-3xl dark:prose-invert">
             <Mdx code={body.code} />
           </div>
           <aside className="sticky self-start top-[120px] right-6 grow ml-10 mt-10 w-[350px] hidden lg:block">
