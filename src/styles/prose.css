@@ -36,3 +36,13 @@
 .prose div[data-rehype-pretty-code-title] {
   @apply rounded-t-lg border border-b-0 border-black px-5 py-3 text-sm font-bold bg-white relative top-2;
 }
+
+.prose :not(pre) > code::before,
+.prose :not(pre) > code::after {
+  display: none;
+}
+ 
+/* inline code block style */
+.prose :not(pre) > code {
+  @apply dark:bg-gray-900 bg-white border border-gray-200 dark:border-gray-700 text-sm font-normal align-middle py-0.5 px-1 rounded;
+}
