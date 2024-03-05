@@ -51,5 +51,5 @@
 }
 
 .prose :not(pre) > code {
-  @apply dark:bg-gray-500 dark:text-white bg-white border border-gray-200 dark:border-gray-700 text-sm font-normal align-middle py-0.5 px-1 rounded;
+  @apply dark:bg-gray-500 dark:text-white bg-gray-200 border border-gray-200 dark:border-gray-700 text-sm font-normal align-middle py-0.5 px-1 rounded;
 }
