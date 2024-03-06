@@ -1,3 +1,5 @@
+import type { Metadata } from 'next';
+
 import { notFound } from 'next/navigation';
 
 import { getBlogPostBySlug, allBlogPosts } from '../../../constants/dataset';
@@ -17,6 +19,21 @@ import Profile from '@/components/profile/Profile';
 import Reaction from '@/components/giscus/Giscus';
 import Hr from '@/components/common/Hr';
 
+export async function generateMetadata({
+  params,
+}: ParamsProps): Promise<Metadata> {
+  const slug = params.slug;
+
+  const post = getBlogPostBySlug(slug[slug.length - 1]);
+
+  if (!post) return notFound();
+
+  return {
+    title: post.title,
+    description: post.subtitle,
+  };
+}
+
 export async function generateStaticParams() {
   return [...allBlogPosts].map((blogPost) => ({
     slug: blogPost.slugAsParams.split('/'),
@@ -24,7 +41,9 @@ export async function generateStaticParams() {
 }
 
 export default function Slug({ params }: ParamsProps) {
-  const post = getBlogPostBySlug(params.slug[params.slug.length - 1]);
+  const slug = params.slug;
+
+  const post = getBlogPostBySlug(slug[slug.length - 1]);
 
   if (!post) return notFound();
 

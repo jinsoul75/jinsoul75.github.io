@@ -70,6 +70,10 @@ const fields: FieldDefs = {
     type: 'string',
     required: true,
   },
+  subtitle: {
+    type: 'string',
+    required: true,
+  },
   category: {
     type: 'string',
     required: true,
