@@ -39,6 +39,10 @@ export function PostTitle({
   );
 }
 
+export function PostSubtitle({ subtitle }: { subtitle: string }) {
+  return <h3>{subtitle}</h3>;
+}
+
 export function PostDate({ date }: { date: string }) {
   return (
     <time className="flex items-center">
@@ -83,6 +87,7 @@ export function PostReadingTime({ readingTime }: { readingTime: string }) {
 }
 
 PostItem.PostTitle = PostTitle;
+PostItem.PostSubtitle = PostSubtitle;
 PostItem.PostDate = PostDate;
 PostItem.PostTags = PostTags;
 PostItem.PostReadingTime = PostReadingTime;

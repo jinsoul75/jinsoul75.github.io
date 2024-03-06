@@ -26,6 +26,7 @@ export default function PostList({
             )}
           >
             <PostItem.PostTitle title={post.title} />
+            <PostItem.PostSubtitle subtitle={post.subtitle} />
             <div className="flex mt-8">
               <div className="grow">
                 <PostItem.PostTags tags={post.tags} />
