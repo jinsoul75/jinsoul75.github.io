@@ -37,7 +37,7 @@ export default function Series({ params }: ParamsProps) {
           <SubTitle className={`${cn('mt-0')}`}>
             {SERIES_INFO[slug].name}
           </SubTitle>
-          <div>{SERIES_INFO[slug].name}</div>
+          <div>{SERIES_INFO[slug].description}</div>
         </div>
         <Hr />
         <PostList posts={seriesPosts} className="flex flex-col grow" />
