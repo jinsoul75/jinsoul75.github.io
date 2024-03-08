@@ -1,7 +1,6 @@
 import NavBar from './NavBar';
 import ThemeToggle from '../theme-toggle/ThemeToggle';
-
-import { PiHamburgerFill } from 'react-icons/pi';
+import HamburgerButton from './HamburgerButton';
 
 export default function Header() {
   return (
@@ -10,7 +9,7 @@ export default function Header() {
         <NavBar />
         <div className="flex gap-2">
           <ThemeToggle />
-          <PiHamburgerFill size={30} className="inline sm:hidden" />
+          <HamburgerButton />
         </div>
       </nav>
     </header>

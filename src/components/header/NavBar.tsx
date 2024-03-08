@@ -6,7 +6,7 @@ export default function NavBar() {
     <ul className="gap-4 hidden sm:flex">
       {MENUS.map((menu, index) => {
         return (
-          <li key={`${menu}${index}`} className="">
+          <li key={`${menu}${index}`}>
             <LinkItem
               className="text-gray-600 p-2 transition duration-300 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-xl"
               href={MENU_INFO[menu].href}
