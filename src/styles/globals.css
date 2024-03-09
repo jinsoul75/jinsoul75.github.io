@@ -13,3 +13,11 @@
 *::selection {
   background-color: pink;
 }
+
+.outer::-webkit-scrollbar {
+  display: none;
+}
+
+.fullpage {
+  @apply w-full h-screen
+}
