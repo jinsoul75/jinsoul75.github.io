@@ -12,7 +12,7 @@ export default function FullPageContainer({
 }) {
   const [currentPage, setCurrentPage] = useState(1);
   const outerDivRef = useRef<HTMLDivElement>(null);
-  console.log('currentPage', currentPage);
+
   useEffect(() => {
     const wheelHandler: EventListenerOrEventListenerObject = (event) => {
       event.preventDefault();

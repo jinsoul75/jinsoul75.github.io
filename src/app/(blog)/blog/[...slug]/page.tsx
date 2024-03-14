@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 import { notFound } from 'next/navigation';
 
-import { getBlogPostBySlug, allBlogPosts } from '../../../constants/dataset';
+import { getBlogPostBySlug, allBlogPosts } from '../../../../constants/dataset';
 
 import { ParamsProps } from '@/types/types';
 
