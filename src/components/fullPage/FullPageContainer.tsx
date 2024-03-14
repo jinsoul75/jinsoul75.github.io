@@ -12,7 +12,7 @@ export default function FullPageContainer({
 }) {
   const [currentPage, setCurrentPage] = useState(1);
   const outerDivRef = useRef<HTMLDivElement>(null);
-
+  console.log('currentPage', currentPage);
   useEffect(() => {
     const wheelHandler: EventListenerOrEventListenerObject = (event) => {
       event.preventDefault();
@@ -26,7 +26,7 @@ export default function FullPageContainer({
         if (deltaY > 0) {
           // 스크롤 내릴 때
           if (scrollTop >= 0 && scrollTop < pageHeight) {
-            setCurrentPage(1);
+            setCurrentPage(2);
             //현재 1페이지
             console.log('현재 1페이지, down');
             outerDivRef.current.scrollTo({
@@ -36,7 +36,7 @@ export default function FullPageContainer({
             });
           } else if (scrollTop >= pageHeight && scrollTop < pageHeight * 2) {
             //현재 2페이지
-            setCurrentPage(2);
+            setCurrentPage(3);
             console.log('현재 2페이지, down');
             outerDivRef.current.scrollTo({
               top: pageHeight * 2,
@@ -58,6 +58,7 @@ export default function FullPageContainer({
           if (scrollTop > pageHeight && scrollTop <= pageHeight * 2) {
             // 현재 3페이지
             console.log('현재 3페이지, up');
+            setCurrentPage(2);
             outerDivRef.current.scrollTo({
               top: pageHeight,
               left: 0,
@@ -70,6 +71,7 @@ export default function FullPageContainer({
           ) {
             //현재 2페이지
             console.log('현재 2페이지, up');
+            setCurrentPage(1);
             outerDivRef.current.scrollTo({
               top: 0,
               left: 0,
@@ -78,6 +80,7 @@ export default function FullPageContainer({
           } else {
             //현재 1페이지
             console.log('현재 1페이지, up');
+            setCurrentPage(1);
             outerDivRef.current.scrollTo({
               top: 0,
               left: 0,
@@ -97,12 +100,42 @@ export default function FullPageContainer({
     };
   }, []);
 
+  useEffect(
+    function pageControll() {
+      const pageHeight = window.innerHeight;
+
+      if (currentPage === 1) {
+        outerDivRef.current?.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: 'smooth',
+        });
+      } else if (currentPage === 2) {
+        outerDivRef.current?.scrollTo({
+          top: pageHeight,
+          left: 0,
+          behavior: 'smooth',
+        });
+      } else {
+        outerDivRef.current?.scrollTo({
+          top: pageHeight * 2,
+          left: 0,
+          behavior: 'smooth',
+        });
+      }
+    },
+    [currentPage],
+  );
+
   return (
     <div ref={outerDivRef} className={className}>
       <FirstPage />
       <SecondPage />
       <FirstPage />
-      <FullPageController currentPage={currentPage} />
+      <FullPageController
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
     </div>
   );
 }
