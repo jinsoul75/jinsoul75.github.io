@@ -3,7 +3,7 @@
 		"es6": true
 	},
 	"ignorePatterns": ["tailwind.config.js"],
-	"extends": ["react-app", "eslint:recommended", "prettier", "next"],
+	"extends": ["react-app", "eslint:recommended", "prettier", "next", "plugin:@typescript-eslint/recommended"],
 	"rules": {
 		"no-multiple-empty-lines": "error",
 		//"no-console": ["error", { "allow": ["warn", "error", "info"] }], 
