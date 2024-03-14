@@ -14,9 +14,9 @@ export default function FullPageContainer({
   const outerDivRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const wheelHandler: EventListenerOrEventListenerObject = (event) => {
+    const wheelHandler = (event: Event) => {
       event.preventDefault();
-      const wheelEvent = event as unknown as WheelEvent<HTMLDivElement>;
+      const wheelEvent = event as unknown as WheelEvent<HTMLElement>;
       const { deltaY } = wheelEvent;
 
       const pageHeight = window.innerHeight;
