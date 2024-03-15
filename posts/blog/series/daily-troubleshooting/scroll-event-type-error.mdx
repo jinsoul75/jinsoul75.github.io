@@ -1,0 +1,117 @@
+---
+title: 스크롤 이벤트 타입 에러
+subtitle: 타입 어설션은 불안정하다.
+date: 2024-03-15
+category: posts
+tags:
+  - typescript
+isSeries: true
+---
+
+# 스크롤 이벤트 타입 에러
+
+## 상황
+
+`useEffect` 로 wheel 이벤트가 발생하면 콜백함수를 실행시키는 코드를 작성했다.
+
+```tsx
+    const wheelHandler = (event:WheelEvent<HTMLElement>) => {
+      event.preventDefault();
+      const { deltaY } = event;
+    //...
+    }
+ 
+    const outerDivRefCurrent = outerDivRef.current;
+
+    if (outerDivRefCurrent) {
+      outerDivRefCurrent.addEventListener('wheel', wheelHandler);
+    }
+
+    return () => {
+      if (outerDivRefCurrent) {
+        outerDivRefCurrent.removeEventListener('wheel', wheelHandler);
+      }
+    };
+```
+
+여기서 `wheelHandler` 에 다음과 같은 타입 에러가 떴다.
+
+`wheelHandler`는 event를 매개변수로 받고 아무 값도 리턴하지 않는다.
+
+```
+No overload matches this call. 
+→ 매개변수 타입이 맞지 않다.
+
+Argument of type '(event: WheelEvent<HTMLElement>) => void' is not assignable to parameter of type '(this: HTMLDivElement, ev: WheelEvent) => any'. 
+
+Argument of type '(event: WheelEvent<HTMLElement>) => void' is not assignable to parameter of type 'EventListenerOrEventListenerObject'. 
+
+Type '(event: WheelEvent<HTMLElement>) => void' is not assignable to type 'EventListener'.  
+
+Type 'Event' is missing the following properties from type 'WheelEvent<HTMLElement>': deltaMode, deltaX, deltaY, deltaZ, and 22 more.ts(2769)
+```
+
+```tsx
+    const wheelHandler = (event:WheelEvent<HTMLElement>) => {
+      event.preventDefault();
+      const { deltaY } = event;
+    //...
+    }
+```
+
+- **WheelEvent**는 `HTMLElement` 타입의 제네릭 타입 매개변수를 가지고 있다. 이는 이벤트가 발생한 HTML 요소가 `HTMLElement` 인스턴스임을 의미한다.
+- event에 `Event` 를 제외한 다른 타입을 주면 `addEventLister` 에서 타입 오류가 난다.
+
+## 해결
+
+```tsx
+    const wheelHandler = (event: Event) => {
+      event.preventDefault();
+      const wheelEvent = event as unknown as WheelEvent<HTMLElement>;
+      const { deltaY } = wheelEvent;
+    //...
+    }
+```
+
+- event에 `Event`타입을 설정하고
+- `wheelEvent` 를 선언하고 event를 할당하면서 타입 어설션을 이용해 컴파일러에게 값의 타입을 명시적으로 지정해준다. 타입을 강제 변환해서 컴파일러는 event 변수가 실제로`WheelEvent<HTMLElement>` 타입인지 확인하지 않는다.
+- 따라서 타입어설션이 잘못된 경우 코드 실행시 오류가 발생할 수 있다.
+
+## **타입 단언 (Assertions)**
+
+타입 단언은 위에서 언급했듯 타입을 컴파일러에게 단언하는 것이다.
+
+그러면 강제 형변환과 같은것인가? 생각이 들었다.
+
+강제 형변환은 실제로 데이터 타입을 변환시키지만 타입단언은 **컴파일러에게 타입이 이것이다! 라고 단언**하는 것 뿐이다.
+
+따라서 런타임에 영향을 끼치지 않고 컴파일 과정에서만 사용되므로 실제 실행시 오류가 발생할 수 있다.
+
+이번 코드에서는 `as` 키워드를 사용했지만 타입 단언에는 다른 방법도 있다. 
+
+- `<>` 앵글 브라켓 사용
+
+```tsx
+let assertion:any = "타입 어설션은 '타입을 단언'합니다.";
+
+let assertion_count:number = (<string>assertion).length;
+```
+
+하지만 앵글 브라켓은 JSX와 함께 사용시 허용되지 않는다.
+
+## 번외
+
+이렇게 오류를 없애고선 커밋을 했더니 husky에서 eslint 에러가 발생했다. `WheelEvent` 를 알 수 없다는 것이다. 찾아보니 타입스크립트는 정적 검사를 위한 타입 정보를 제공하는데 eslint는 이 타입 정보를 모른다는 것이다. 따라서 eslint에 타입스크립트 플러그인을 추가해주어야 한다.
+
+```tsx
+npm i -D @typescript-eslint/eslint-plugin
+```
+
+```tsx
+//.eslintrc
+"extends": ["react-app", "eslint:recommended", "prettier", "next", "plugin:@typescript-eslint/recommended"],
+```
+
+## 결론
+
+타입스크립트를 제대로 익히지 않은 상태에서 적용하려니 꽤나 다양한 에러사항을 마주한다. 그래도 이 에러 덕분에 어설션의 특징을 알게 되었고 앞으로 강제로 타입을 지정하는 타입 어설션을 사용할때 주의해야겠다.

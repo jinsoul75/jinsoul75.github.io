@@ -33,6 +33,13 @@ export const SERIES_INFO: SeriesCollection = {
     thumbnail:
       'https://plus.unsplash.com/premium_photo-1678567671234-388cf4fa0224?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGJsb2d8ZW58MHx8MHx8fDA%3D',
   },
+  'daily-troubleshooting': {
+    route: 'blog/series/daily-troubleshooting',
+    name: '데일리 트러블 슈팅',
+    description: '고난과 역경을 이겨내봅시다.',
+    thumbnail:
+      'https://images.unsplash.com/photo-1552040241-0a73774f8b7f?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fCVFRCU4QSVCOCVFQiU5RiVBQyVFQiVCOCU5NHxlbnwwfHwwfHx8MA%3D%3D',
+  },
 };
 
 export const SERIES = Object.keys(SERIES_INFO);
