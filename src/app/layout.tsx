@@ -1,11 +1,17 @@
 import { Suspense, ReactNode } from 'react';
 import type { Metadata } from 'next';
 import { GoogleAnalytics } from '@next/third-parties/google';
-
+import localFont from 'next/font/local';
 import '../styles/globals.css';
 
 import Provider from '@/components/provider/Provider';
 import Loading from './loading';
+
+const myFont = localFont({
+  src: 'fonts/BMHANNAPro.woff2',
+  display: 'swap',
+  variable: '--font-hanna',
+});
 
 export const metadata: Metadata = {
   title: 'Jinsoul Blog',
@@ -18,7 +24,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="ko">
+    <html lang="ko" className={`${myFont.variable} font-BMHANNAPro`}>
       <GoogleAnalytics gaId={'G-4843GGMST8'} />
       <body suppressHydrationWarning={true}>
         <Provider>

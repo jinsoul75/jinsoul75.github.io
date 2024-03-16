@@ -5,6 +5,7 @@ module.exports = {
   theme: {
     fontFamily: {
       NotoSans: ['NotoSans'],
+      BMHANNAPro: ['var(--font-hanna)'],
     },
     container: {
       center: true,
