@@ -4,8 +4,7 @@ module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     fontFamily: {
-      NotoSans: ['NotoSans'],
-      BMHANNAPro: ['var(--font-hanna)'],
+      gmarketSans: ['var(--font-gmarketSans)'],
     },
     container: {
       center: true,
