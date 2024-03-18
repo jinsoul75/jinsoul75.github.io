@@ -9,7 +9,16 @@ import Provider from '@/components/provider/Provider';
 import Loading from './loading';
 
 const gmarketSans = localFont({
-  src: 'fonts/GmarketSansMedium.woff2',
+  src: [
+    {
+      path: './fonts/GmarketSansMedium.woff2',
+      weight: '400',
+    },
+    {
+      path: './fonts/GmarketSansBold.woff2',
+      weight: '700',
+    },
+  ],
   display: 'swap',
   variable: '--font-gmarketSans',
 });
@@ -25,7 +34,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="ko" className={`${gmarketSans.variable} font-gmarketSans`}>
+    <html
+      lang="ko"
+      className={`${gmarketSans.variable} font-gmarketSans font-normal`}
+    >
       <GoogleAnalytics gaId={'G-4843GGMST8'} />
       <body suppressHydrationWarning={true}>
         <Provider>
