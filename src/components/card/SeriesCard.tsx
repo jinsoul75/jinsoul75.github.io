@@ -7,7 +7,7 @@ import { IoBookmarksOutline } from 'react-icons/io5';
 
 export default function SeriesCard() {
   return (
-    <ul className="flex flex-col gap-4 sm:flex-row mb-4">
+    <ul className="flex gap-4 mb-4 overflow-y-hidden">
       {SERIES.map((series) => (
         <li key={series} className="group">
           <Link className="block" href={`blog/series/${series}`}>
