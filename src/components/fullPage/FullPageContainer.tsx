@@ -95,9 +95,9 @@ export default function FullPageContainer({
 
     outerDivRefCurrent?.addEventListener('wheel', wheelHandler);
 
-    return () => {
-      outerDivRefCurrent?.removeEventListener('wheel', wheelHandler);
-    };
+    // return () => {
+    //   outerDivRefCurrent?.removeEventListener('wheel', wheelHandler);
+    // };
   }, []);
 
   useEffect(

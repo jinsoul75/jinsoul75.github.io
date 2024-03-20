@@ -1,0 +1,126 @@
+---
+title: useEffect
+subtitle: 훅 중의 훅
+date: 2024-03-20
+category: posts
+tags:
+  - react
+isSeries: true
+---
+
+저는 사실 useEffect가 리액트 훅 중에서 가장 어려운 훅이라고 생각합니다.
+
+**렌더링 후 실행**하거나 **언마운트 될때** 실행할 함수를 실행하는 것
+
+즉 컴포넌트의 생명주기를 다루는것이 useEffect의 역할이라고 생각했지만
+
+막상 코드를 작성할 때나 useEffect에 관한 아티클을 보다보면 쉽지 않은 내용을 접하곤 합니다.
+
+## useEffect
+
+useEffect는 말 그대로 (side)Effect, 부수효과를 처리하고
+
+어떤 상태값을 가지고 실행되는지가 중요한 훅 입니다.
+
+```tsx
+useEffect(() => {
+	//1번째 인자 : 부수효과를 가진 함수
+	},[] //2번째 인자 : 의존성 배열
+}
+```
+
+useEffect의 가장 기본적인 형태입니다. 
+
+2번째 인자로 들어가는 의존성 배열의 요소가 변경된다면
+
+1번째 인자인 콜백함수가 실행이됩니다.
+
+여기서 useEffect는 어떻게 의존성 배열의 값이 바뀐것을 알 수 있을까요?
+
+함수 컴포넌트는 **함수를 실행해서 렌더링을 수행**합니다.
+
+즉, 렌더링 할 때마다 컴포넌트는 **고유한 state와 props값**을 가지고 있습니다.
+
+따라서 렌더링 시마다 의존성 배열에 있는 요소들을 이전 값과 비교해서
+
+다르다면 그 때 useEffect의 콜백함수를 실행합니다.
+
+## 클린업 함수
+
+useEffect의 리턴값인 클린업 함수는
+
+위에서 언급한 바와 같이 언마운트 될 때 실행할 함수
+
+예를 들어 등록한 이벤트를 지울때 사용할 수 있습니다.
+
+```tsx
+  useEffect(()=>{
+    const outerDivRefCurrent = outerDivRef.current;
+
+    outerDivRefCurrent?.addEventListener('wheel', wheelHandler);
+
+    return () => {
+      outerDivRefCurrent?.removeEventListener('wheel', wheelHandler);
+    };
+  },[]);
+```
+
+```tsx
+import { useState, useEffect } from "react";
+
+export default function App() {
+  const [state, setState] = useState(0);
+
+  useEffect(() => {
+    console.log("callback:", state);
+    return () => console.log("cleanup:", state);
+  },[]);
+
+  return (
+    <div className="App">
+      <div>{state}</div>
+      <button onClick={() => setState(state + 1)}>+</button>
+    </div>
+  );
+}
+```
+
+
+클린업 함수는 +1을 하기 전 state값을 참조해 실행이 됩니다.
+
+클린업 함수는 새로운 값을 기반으로 렌더링 뒤에 실행되지만 
+
+새로운 값을 읽는 것이 아닌
+
+함수가 정의되었을 때 **선언됐던 이전 값**을 보고 실행됩니다.
+
+useEffect는 콜백이 실행될 때마다
+
+이전의 클린업 함수가 존재하면 그 **클린업 함수를 실행한 뒤에 콜백을 실행**합니다.
+
+따라서 이벤트를 추가하기 전에
+
+이전에 등록했던 이벤트 핸들러를 삭제하는 코드를 클린업 함수에 추가합니다.
+
+이렇게 함으로써 이벤트 핸들러가 무한히 추가되는것을 막을 수 있습니다.
+
+클린업 함수를 원래 `컴포넌트가 언마운트 될 때` 라고 생각했었는데
+
+언마운트라는 개념이 클래스 컴포넌트에서 `특정 컴포넌트가 DOM에서 사라지는것` 이라는 개념으로 사용되던 용어라고 합니다.
+
+따라서 함수형 컴포넌트에서 클린업 함수는
+
+컴포넌트가 리렌더링 되었을 때
+
+의존성 변화가 있었을 당시 이전 값을 기준으로 실행되는 함수라 볼 수 있습니다.
+
+## useEffect의 콜백함수
+
+위에서 살펴보았듯 useEffect의 첫번째 콜백함수는 렌더링 후 실행이됩니다.
+
+부수효과를 처리하기에 
+
+이를 렌더링 시점에서 봤을 때 다른점이 존재합니다.
+
+1. SSR시에 useEffect의 콜백함수는 클라이언트에서 실행되는 함수로 보장이 되고 window객체를 참조할 수 있습니다.
+2. RSC에서는 useEffect 없이 함수 내부에서의 직접 실행으로 부수효과를 처리할 수 있습니다.
