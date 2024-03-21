@@ -34,6 +34,20 @@ export const getBlogPostBySlug = (slug: string) =>
     (blog) => blog.slugAsParams.split('/').slice(-1)[0] === slug,
   );
 
+export const getPrevPostBySlug = (slug: string) => {
+  const index = allBlogPosts.findIndex(
+    (blog) => blog.slugAsParams.split('/').slice(-1)[0] === slug,
+  );
+  return allBlogPosts[index + 1];
+};
+
+export const getNextPostBySlug = (slug: string) => {
+  const index = allBlogPosts.findIndex(
+    (blog) => blog.slugAsParams.split('/').slice(-1)[0] === slug,
+  );
+  return allBlogPosts[index - 1];
+};
+
 export const recentPosts = allBlogPosts.slice(0, 4);
 
 export const getPostsByTag = (tag: string) =>

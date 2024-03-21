@@ -2,7 +2,12 @@ import type { Metadata } from 'next';
 
 import { notFound } from 'next/navigation';
 
-import { getBlogPostBySlug, allBlogPosts } from '../../../../constants/dataset';
+import {
+  getBlogPostBySlug,
+  allBlogPosts,
+  getPrevPostBySlug,
+  getNextPostBySlug,
+} from '../../../../constants/dataset';
 
 import { ParamsProps } from '@/types/types';
 
@@ -18,6 +23,7 @@ import ProgressBar from '@/components/progressBar/ProgressBar';
 import Profile from '@/components/profile/Profile';
 import Reaction from '@/components/giscus/Giscus';
 import Hr from '@/components/common/Hr';
+import StepPostCard from '@/components/card/StepPostCard';
 
 export async function generateMetadata({
   params,
@@ -43,7 +49,10 @@ export async function generateStaticParams() {
 export default function Slug({ params }: ParamsProps) {
   const slug = params.slug;
 
-  const post = getBlogPostBySlug(slug[slug.length - 1]);
+  const slugTitle = slug[slug.length - 1];
+  const post = getBlogPostBySlug(slugTitle);
+  const prevPost = getPrevPostBySlug(slugTitle);
+  const nextPost = getNextPostBySlug(slugTitle);
 
   if (!post) return notFound();
 
@@ -73,6 +82,13 @@ export default function Slug({ params }: ParamsProps) {
           </aside>
         </div>
       </article>
+
+      <Hr />
+
+      <div className="flex justify-between">
+        {prevPost && <StepPostCard step="prev" post={prevPost} />}
+        {nextPost && <StepPostCard step="next" post={nextPost} />}
+      </div>
 
       <Hr />
 
