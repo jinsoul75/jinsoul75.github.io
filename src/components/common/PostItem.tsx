@@ -8,25 +8,21 @@ import { cn } from '@/libs/utils';
 export default function PostItem({
   children,
   className,
-  slugAsParams,
 }: {
   children: ReactNode;
   className?: string;
-  slugAsParams?: string;
 }) {
-  return (
-    <article className={className}>
-      <Link href={`/blog/${slugAsParams}`}>{children}</Link>
-    </article>
-  );
+  return <article className={className}>{children}</article>;
 }
 
 export function PostTitle({
   title,
   className,
+  slugAsParams,
 }: {
   title: string;
   className?: string;
+  slugAsParams?: string;
 }) {
   return (
     <h2
@@ -34,7 +30,7 @@ export function PostTitle({
         `text-2xl font-semibold hover:underline hover:underline-offset-2 hover:decoration-2 ${className}`,
       )}
     >
-      {title}
+      <Link href={`/blog/${slugAsParams}`}> {title}</Link>
     </h2>
   );
 }

@@ -19,13 +19,16 @@ export default function PostList({
         return (
           <PostItem
             key={post._id}
-            slugAsParams={post.slugAsParams}
             className={cn(
               'rounded-lg p-4 transition-transform duration-300 transform',
               'hover:-translate-y-1',
+              'hover:shadow-xl',
             )}
           >
-            <PostItem.PostTitle title={post.title} />
+            <PostItem.PostTitle
+              title={post.title}
+              slugAsParams={post.slugAsParams}
+            />
             <PostItem.PostSubtitle subtitle={post.subtitle} />
             <div className="flex mt-8">
               <div className="grow">
